@@ -1,0 +1,2108 @@
+#! /opt/thefoundry/nuke/Nuke10.5v5/libnuke-10.5.5.so -nx
+version 10.5 v5
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="1919" y="-1" w="2050" h="1082" maximized="1" screen="1">
+        <splitter orientation="1">
+            <split size="49"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1995"/>
+            <dock id="" activePageId="DAG.1" focus="true">
+                <page id="DAG.1"/>
+                <page id="DAG.2"/>
+                <page id="DAG.3"/>
+            </dock>
+        </splitter>
+    </window>
+    <window x="1920" y="112" w="951" h="668" fullscreen="1" screen="1">
+        <splitter orientation="2">
+            <split size="668"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+                <page id="Viewer.2"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Volumes/af/show/default/shots/color/color_000/sandbox/ssvirsky/nuke/scripts/Class_2dTrickery_v1.nk
+ frame 1021
+ first_frame 1001
+ last_frame 1100
+ lock_range true
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement OCIO
+ OCIO_config custom
+ customOCIOConfigPath /Volumes/af/show/default/shots/color/color_000/sandbox/ctouraille/ocio/ollie/config.ocio
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT linear
+ monitorLut Neutral
+ int8Lut raw
+ int16Lut sRGB
+ logLut AlexaV3LogC
+ floatLut linear
+ views "right #ff0000
+left #00ff00"
+ free_type_font_path /Volumes/af/tools/common/nuke/slate/font/
+ free_type_system_fonts false
+ addUserKnob {20 mariTab l Mari}
+ addUserKnob {26 cmdStatus l "listen status" t "The status of Nuke's command port" T <b>Disabled</b>}
+ addUserKnob {26 sendStatus l "send status" t "The status of Nuke's connection to Mari" T <b>Inactive</b>}
+ addUserKnob {3 socketPort l "nuke command port" t "Port to listen on. Make sure this matches the command port set in Mari's \"Nuke\" Palette."}
+ socketPort 50107
+ addUserKnob {6 enableSocket l enabled -STARTLINE}
+ addUserKnob {26 divider l "" +STARTLINE}
+ addUserKnob {20 advanced n 1}
+ advanced 0
+ addUserKnob {3 portRange l "port range" t "If the main specified command port is unavailable, Nuke will try using the next port number, and continue until successful or the indicated number of ports have been tried."}
+ portRange 200
+ addUserKnob {4 enablePortRange l "" t "Indicates whether to use a range of ports up to the given number, or to use only the single one specified." -STARTLINE M {"use range" "single port only"}}
+ addUserKnob {6 localhostOnly l "local host only" t "This determines whether the Mari bridge server will listen for connections from any machine, or from \"localhost\" (the local machine) only.<p>Only allowing connections from localhost is more secure, but will prevent you from using the Nuke&lt;&gt;Mari workflow across the network." +STARTLINE}
+ addUserKnob {1 hostName l "mari host" t "The machine name or IP address that Mari is running on.\nLeave empty if both Mari and Nuke are running on the same machine."}
+ hostName localhost
+ addUserKnob {3 socketPortSend l port t "Port that Mari is listening to. Make sure this matches the command port set in Mari's preferences." -STARTLINE}
+ socketPortSend 6100
+ addUserKnob {2 mariDataDir l "mari data dir" t "Path to directory that will hold transient data to be sent to Mari (exrs, objs and fbx files). If this is left empty, a \"mari\" directory will be created in the nk file's location"}
+ mariDataDir "\[getenv NUKE_TEMP_DIR]/mariData"
+ addUserKnob {2 mariLocation l "mari launch path" t "The path to launch Mari from.<br>This can also be set using the <b>MARI_INSTALL_PATH</b> environment variable."}
+ mariLocation /opt/thefoundry/mari/mari3.3v1EXT4/mari
+ addUserKnob {20 endGroup n -1}
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode10
+ tile_color 0xaaaaaa00
+ label "CAM FADE"
+ note_font_size 42
+ xpos 7495
+ ypos 5373
+ bdwidth 1341
+ bdheight 1356
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode17
+ tile_color 0x8e388e00
+ label FIX-O-MATIC
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 42
+ xpos 10195
+ ypos 5410
+ bdwidth 975
+ bdheight 1342
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x8e8e3800
+ note_font_size 42
+ xpos 5298
+ ypos 5401
+ bdwidth 929
+ bdheight 1394
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode9
+ tile_color 0x7171c600
+ label DEFLICKER
+ note_font_size 42
+ xpos -6407
+ ypos 5412
+ bdwidth 816
+ bdheight 1374
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x8e8e3800
+ label "fading trackers"
+ note_font_size 42
+ xpos 1226
+ ypos 5388
+ bdwidth 1032
+ bdheight 1379
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode11
+ tile_color 0x8e8e3800
+ label COMPOUNDING
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 42
+ xpos 3576
+ ypos 5432
+ bdwidth 560
+ bdheight 1377
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode12
+ tile_color 0x388e8e00
+ label "ORIGINAL CAMERA"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 42
+ xpos 5343
+ ypos 5665
+ bdwidth 423
+ bdheight 168
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode13
+ tile_color 0x388e8e00
+ label "RETIMED CAMERA"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 42
+ xpos 5336
+ ypos 5858
+ bdwidth 422
+ bdheight 166
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode14
+ tile_color 0x388e8e00
+ label RETIME
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 42
+ xpos 5858
+ ypos 5809
+ bdwidth 325
+ bdheight 222
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode15
+ tile_color 0x71c67100
+ label HORIZON
+ note_font_size 42
+ xpos 12585
+ ypos 5607
+ bdwidth 342
+ bdheight 870
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode16
+ tile_color 0x71c67100
+ label "a*f  + b*(1-f)"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 42
+ xpos -1447
+ ypos 5400
+ bdwidth 1134
+ bdheight 1375
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode19
+ tile_color 0x38102600
+ label "MISSING FRAMES"
+ note_font_size 42
+ xpos 10632
+ ypos 5489
+ bdwidth 435
+ bdheight 349
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x8e8e3800
+ label "COLOR GUNK"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 42
+ xpos -3919
+ ypos 5410
+ bdwidth 875
+ bdheight 1374
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x8e8e3800
+ label deflicker
+ note_font_size 42
+ xpos -6397
+ ypos 5779
+ bdwidth 392
+ bdheight 432
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ label "INPUT CAMERAS"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 22
+ note_font_color 0x111111ff
+ xpos 7640
+ ypos 5643
+ bdwidth 983
+ bdheight 282
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode56
+ tile_color 0x8e8e3800
+ label "ALL FAKE"
+ note_font_size 42
+ xpos 10381
+ ypos 6360
+ bdwidth 296
+ bdheight 167
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode57
+ tile_color 0x388e8e00
+ label ODD
+ note_font_size 42
+ xpos 10289
+ ypos 6074
+ bdwidth 130
+ bdheight 117
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode58
+ tile_color 0x388e8e00
+ label EVEN
+ note_font_size 42
+ xpos 10580
+ ypos 6091
+ bdwidth 132
+ bdheight 117
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode59
+ tile_color 0x388e8e00
+ label "FAKE ODD"
+ note_font_size 42
+ xpos 10579
+ ypos 6215
+ bdwidth 132
+ bdheight 117
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x388e8e00
+ label CONTROLS
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 22
+ xpos 7643
+ ypos 5932
+ bdwidth 155
+ bdheight 248
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode60
+ tile_color 0x388e8e00
+ label "FAKE EVEN"
+ note_font_size 42
+ xpos 10281
+ ypos 6213
+ bdwidth 132
+ bdheight 117
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0x368834ff
+ label "OUTPUT CAMERA"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 22
+ note_font_color 0x111111ff
+ xpos 7811
+ ypos 5934
+ bdwidth 445
+ bdheight 412
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode8
+ tile_color 0x101010ff
+ label "AUX STUFF\nmess with these at your own risk"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 22
+ xpos 8271
+ ypos 5937
+ bdwidth 516
+ bdheight 174
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode18
+ tile_color 0x7171c600
+ label "(      )"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ note_font_size 42
+ xpos 1235
+ ypos 5458
+ bdwidth 453
+ bdheight 502
+ z_order 1
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "DON'T DELETE THE RED DOTS!!!"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ xpos 7668
+ ypos 5809
+}
+Camera2 {
+ inputs 0
+ translate {0 12 0}
+ rotate {0 41 12}
+ name Camera1
+ xpos 7751
+ ypos 5707
+}
+set N43f4590 [stack 0]
+Dot {
+ name DotA
+ tile_color 0xff0000ff
+ label DotA
+ xpos 7775
+ ypos 5786
+}
+Camera2 {
+ inputs 0
+ translate {{parent.DotB.input.translate} {parent.DotB.input.translate} {parent.DotB.input.translate}}
+ rotate {{parent.DotB.input.rotate} {parent.DotB.input.rotate} {parent.DotB.input.rotate}}
+ focal {{parent.DotB.input.focal}}
+ haperture {{parent.DotB.input.haperture}}
+ vaperture {{parent.DotB.input.vaperture}}
+ win_translate {{parent.DotB.input.win_translate} {parent.DotB.input.win_translate}}
+ name Cam_B
+ tile_color 0x323232ff
+ xpos 8422
+ ypos 6003
+}
+Camera2 {
+ inputs 0
+ translate {{parent.DotD.input.translate} {parent.DotD.input.translate} {parent.DotD.input.translate}}
+ rotate {{parent.DotD.input.rotate} {parent.DotD.input.rotate} {parent.DotD.input.rotate}}
+ focal {{parent.DotD.input.focal}}
+ haperture {{parent.DotD.input.haperture}}
+ vaperture {{parent.DotD.input.vaperture}}
+ win_translate {{parent.DotD.input.win_translate} {parent.DotD.input.win_translate}}
+ name Cam_D
+ tile_color 0x323232ff
+ xpos 8596
+ ypos 6002
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label v0.4
+ xpos 7679
+ ypos 6137
+}
+Camera2 {
+ inputs 0
+ translate {0 0 {curve x1001 0 x1100 -50.54999924}}
+ name Camera6
+ label "\[file tail \[value file]]"
+ xpos 5374
+ ypos 5737
+}
+Dot {
+ name Dot9
+ tile_color 0xff0000ff
+ xpos 5525
+ ypos 5768
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ label "PLUG YOUR CAMERA TO THE RED DOT"
+ xpos 5547
+ ypos 5768
+}
+Camera2 {
+ inputs 0
+ translate {{parent.DotA.input.translate} {parent.DotA.input.translate} {parent.DotA.input.translate}}
+ rotate {{parent.DotA.input.rotate} {parent.DotA.input.rotate} {parent.DotA.input.rotate}}
+ focal {{parent.DotA.input.focal}}
+ haperture {{parent.DotA.input.haperture}}
+ vaperture {{parent.DotA.input.vaperture}}
+ win_translate {{parent.DotA.input.win_translate} {parent.DotA.input.win_translate}}
+ name Cam_A
+ tile_color 0x323232ff
+ xpos 8341
+ ypos 6007
+}
+Read {
+ inputs 0
+ file /Volumes/af/show/oa/shots/202_054/202_054_0010/publish/main/plate/v003/render/plt01/exr/202_054_0010_plt01_v003.shotSRC.%05d.exr
+ format "5120 2700 0 0 5120 2700 1 "
+ first 1001
+ last 1170
+ origfirst 1001
+ origlast 1170
+ origset true
+ colorspace shotSRC
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_ENTITY_NAME
+ value2 202_054_0010
+ key3 LOOK
+ key4 AF_SEQUENCE_NAME
+ value4 202_054
+ name Read6
+ xpos -3909
+ ypos 5663
+ addUserKnob {20 "Publish Info"}
+ addUserKnob {1 sg_project l project}
+ sg_project oa
+ addUserKnob {1 sg_entity_type l "entity type"}
+ sg_entity_type Shot
+ addUserKnob {1 sg_entity_code l "entity code"}
+ sg_entity_code 202_054_0010
+ addUserKnob {22 sg_lock_entity l "Lock to Current" T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(True)" +STARTLINE}
+ addUserKnob {22 sg_lock_entity_from_publish l "Lock to Publish" -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(True, publish=True)"}
+ addUserKnob {22 sg_clear_entity l Clear -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(False)"}
+ addUserKnob {26 ""}
+ addUserKnob {1 sg_variation l variation}
+ sg_variation main
+ addUserKnob {1 sg_step.Step.short_name l step}
+ sg_step.Step.short_name plate
+ addUserKnob {1 sg_layer l layer}
+ sg_layer plt01
+ addUserKnob {6 sg_layer_glob l "glob search" t "Match using Unix shell-style wildcards :\n<b>*</b> matches everything\n<b>?</b> matches any single character\n<b>\[<i>seq</i>]</b> matches any character in <i>seq</i>\n<b>\[!<i>seq</i>]</b> matches any character not in <i>seq</i>\n\nAlso supports \"!\", \"&&\" and \"||\" operators.\n" -STARTLINE}
+ addUserKnob {1 sg_sublayer l sublayer}
+ addUserKnob {6 sg_sublayer_glob l "glob search" t "Match using Unix shell-style wildcards :\n<b>*</b> matches everything\n<b>?</b> matches any single character\n<b>\[<i>seq</i>]</b> matches any character in <i>seq</i>\n<b>\[!<i>seq</i>]</b> matches any character not in <i>seq</i>\n\nAlso supports \"!\", \"&&\" and \"||\" operators.\n" -STARTLINE}
+ addUserKnob {1 sg_channel l channel}
+ addUserKnob {1 sg_publish_type l publish_type}
+ sg_publish_type render
+ addUserKnob {1 sg_extension l extension}
+ sg_extension exr
+ addUserKnob {1 sg_path l path +DISABLED}
+ sg_path /Volumes/af/show/oa/shots/202_054/202_054_0010/publish/main/plate/v003/render/plt01/exr/202_054_0010_plt01_v003.shotSRC.%05d.exr
+ addUserKnob {26 ""}
+ addUserKnob {1 sg_force_version l "force version"}
+ addUserKnob {6 sg_greatest_only l "greatest only" +STARTLINE}
+ addUserKnob {6 sg_fullrange_only l "fullrange only" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {22 sg_auto_update l Update -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).auto_update()"}
+ addUserKnob {22 sg_browse l Browse -STARTLINE T "from afnuke.build import NukePublishBrowserDialog; NukePublishBrowserDialog.create(node=nuke.thisNode())"}
+}
+Reformat {
+ name Reformat3
+ xpos -3909
+ ypos 5767
+}
+set N83c1f40 [stack 0]
+Read {
+ inputs 0
+ file /Volumes/af/show/default/shots/color/color_001/publish/main/plate/v001/render/plt01/color_001_main_plate_plt01_v001.%05d.exr
+ origset true
+ version 1
+ auto_alpha true
+ name AARead1
+ label "frames: 1-1\ngreatest: False"
+ xpos -3692
+ ypos 5516
+ addUserKnob {20 AutoAsset}
+ addUserKnob {1 force_version}
+ addUserKnob {1 auto_asset_shot}
+ addUserKnob {1 auto_asset_variation}
+ auto_asset_variation main
+ addUserKnob {1 auto_asset_step}
+ auto_asset_step plate
+ addUserKnob {1 auto_asset_layer}
+ auto_asset_layer plt01
+ addUserKnob {1 auto_asset_type}
+ addUserKnob {6 fullrange_only +STARTLINE}
+ addUserKnob {6 greatest_only -STARTLINE}
+}
+ColorCorrect {
+ contrast 0.82
+ gain {0.9333333969 1.133333325 0.9333333969 1}
+ name ColorCorrect1
+ xpos -3692
+ ypos 5626
+}
+Crop {
+ box {836 646 2900 2334}
+ reformat true
+ crop false
+ name Crop1
+ xpos -3692
+ ypos 5660
+}
+Reformat {
+ resize fit
+ black_outside true
+ name Reformat2
+ xpos -3692
+ ypos 5692
+}
+Transform {
+ translate {272 1305}
+ scale 0.09499999881
+ center {780 -840}
+ shutteroffset centred
+ name Transform1
+ xpos -3692
+ ypos 5814
+}
+Group {
+ inputs 2
+ name colorGunk
+ tile_color 0x281800
+ xpos -3732
+ ypos 5908
+ mapsize {0.1176470588 0.6408450704}
+ addUserKnob {20 User}
+ addUserKnob {8 Merge4_mix l mix}
+ addUserKnob {41 size T Blur2.size}
+}
+ Input {
+  inputs 0
+  name FG
+  xpos 516
+  ypos 298
+ }
+ Dot {
+  name Dot11
+  xpos 550
+  ypos 338
+ }
+set N7ffdd80 [stack 0]
+ Dot {
+  name Dot13
+  xpos 660
+  ypos 338
+ }
+set N8002a00 [stack 0]
+ Dot {
+  name Dot12
+  xpos 793
+  ypos 338
+ }
+ Dot {
+  name Dot10
+  xpos 793
+  ypos 641
+ }
+ Input {
+  inputs 0
+  name BG
+  xpos 250
+  ypos 312
+  number 1
+ }
+ Dot {
+  name Dot14
+  xpos 284
+  ypos 352
+ }
+set N8015300 [stack 0]
+ Blur {
+  channels {{{Blur2.channels}}}
+  size {{Blur2.size}}
+  quality {{Blur2.quality}}
+  crop {{Blur2.crop}}
+  maskChannelMask {{{Blur2.maskChannelMask}}}
+  maskChannelInput {{{Blur2.maskChannelInput}}}
+  invert_mask {{Blur2.invert_mask}}
+  mix {{Blur2.mix}}
+  name Blur1
+  xpos 355
+  ypos 439
+ }
+push $N7ffdd80
+ Blur {
+  channels rgba
+  size 84
+  name Blur2
+  xpos 516
+  ypos 432
+ }
+ Unpremult {
+  name Unpremult2
+  xpos 516
+  ypos 458
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge3
+  xpos 422
+  ypos 543
+ }
+ Dot {
+  name Dot9
+  xpos 456
+  ypos 581
+ }
+push $N8002a00
+ Unpremult {
+  name Unpremult3
+  xpos 623
+  ypos 456
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.Merge4_mix}}
+  name Merge4
+  xpos 623
+  ypos 577
+ }
+set N78d77c0 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy1
+  xpos 623
+  ypos 634
+ }
+ Premult {
+  name Premult2
+  xpos 623
+  ypos 696
+ }
+ Dot {
+  name Dot8
+  xpos 657
+  ypos 770
+ }
+set N78fd920 [stack 0]
+push $N8015300
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 250
+  ypos 767
+ }
+ Dot {
+  name Dot2
+  xpos 284
+  ypos 791
+ }
+push $N78fd920
+ Output {
+  name Output1
+  xpos 623
+  ypos 872
+ }
+push $N78d77c0
+ Viewer {
+  frame 1021
+  frame_range 1001-1100
+  name Viewer1
+  selected true
+  xpos 157
+  ypos 475
+ }
+end_group
+Dot {
+ name Dot11
+ xpos -3698
+ ypos 6080
+}
+push $N83c1f40
+Merge2 {
+ inputs 2
+ name Merge1
+ xpos -3904
+ ypos 6076
+}
+Text2 {
+ inputs 0
+ font_size_toolbar 100
+ font_width_toolbar 100
+ font_height_toolbar 100
+ message "\[value frame]"
+ old_message {{49 48 51 57 46 54 56}
+   }
+ old_expression_markers {{0 6}
+   }
+ box {0 979 213 1080}
+ transforms {{0 2}
+   }
+ cursor_position 13
+ center {1024 540}
+ cursor_initialised true
+ initial_cursor_position {{0 1080}
+   }
+ group_animations {{0} imported: 0 selected: 0 items: "root transform/"}
+ animation_layers {{1 11 1024 540 0 0 1 1 0 0 0 0}
+   }
+ name Text1
+ xpos 3632
+ ypos 5559
+}
+RotoPaint {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44800000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {px
+        {x447a4000 x44898000}
+        {{xc27651a8}
+      {0}}
+        {{x43088000 x44eb54ed}
+      {x43d20000 x43cbd89d}}
+        {{x427651a8}
+      {0}}
+        {{0}
+      {xc27651a8}}
+        {{x43780000 x44f944ed}
+      {x4404e000 x4401cc4e}}
+        {{0}
+      {x427651b0}}
+        {{x427651a8}
+      {0}}
+        {{x43088000 x44eb54ed}
+      {x4420c000 x441dac4e}}
+        {{xc27651a8}
+      {0}}
+        {{0}
+      {x427651b0}}
+        {{x41c80000 x44dd64ed}
+      {x4404e000 x4401cc4e}}
+        {{0}
+      {xc27651a8}}}}
+      {cc
+       {f 8192}
+       {px
+        {x447a4000 x44898000}
+        {{xc27651a8}
+      {0}}
+        {{0}
+      {0}}
+        {{x427651a8}
+      {0}}
+        {{0}
+      {xc27651a8}}
+        {{0}
+      {0}}
+        {{0}
+      {x427651b0}}
+        {{x427651a8}
+      {0}}
+        {{0}
+      {0}}
+        {{xc27651a8}
+      {0}}
+        {{0}
+      {x427651b0}}
+        {{0}
+      {0}}
+        {{0}
+      {xc27651a8}}}}}
+     {tx x447a4000 x43088000 x4404e000}
+     {a osw x41200000 osf 0 str 1 spx x44800000 spy x44070000 sb 1 nv x40000000 view2 x40000000 ltn x447a4000 ltm x447a4000 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1024 540}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 1001
+ lifetime_end 1001
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name RotoPaint1
+ xpos 3632
+ ypos 5593
+}
+FrameRange {
+ first_frame 1001
+ last_frame 1100
+ time ""
+ name FrameRange1
+ xpos 3632
+ ypos 5627
+}
+Dot {
+ name Dot1
+ xpos 3666
+ ypos 5761
+}
+set N796c980 [stack 0]
+TimeWarp {
+ lookup {{curve C x1001 1001 x1006.871033 1082.894531 x1013.52478 1013.421021 x1019.787048 1065.236694 x1024.875488 1013.421021 x1030.746216 1078.262939 x1034.660156 1019.21051 x1040 1071.943481 x1047 1018.666077 x1056 1090.348389 x1064 1016.728699 x1074 1093.254395 x1082 1026.415527 x1087 1092.285645 x1091 1043.851685 x1100 1100}}
+ time ""
+ filter none
+ name TimeWarp1
+ xpos 3632
+ ypos 5872
+}
+TimeWarp {
+ lookup {{curve C x1001 1001 x1024 1036.289429 x1052 1050.473511 s0 x1077 1060.605103 x1100 1100}}
+ time ""
+ filter none
+ name TimeWarp2
+ xpos 3632
+ ypos 5934
+}
+Dot {
+ name Dot7
+ xpos 3666
+ ypos 6057
+}
+Camera2 {
+ inputs 0
+ translate {{parent.DotE.input.translate} {parent.DotE.input.translate} {parent.DotE.input.translate}}
+ rotate {{parent.DotE.input.rotate} {parent.DotE.input.rotate} {parent.DotE.input.rotate}}
+ focal {{parent.DotE.input.focal}}
+ haperture {{parent.DotE.input.haperture}}
+ vaperture {{parent.DotE.input.vaperture}}
+ win_translate {{parent.DotE.input.win_translate} {parent.DotE.input.win_translate}}
+ name Cam_E
+ tile_color 0x323232ff
+ xpos 8667
+ ypos 6006
+}
+Transform {
+ inputs 0
+ translate {149 -274}
+ center {1024 540}
+ shutteroffset centred
+ name Transform2
+ xpos -1041
+ ypos 6350
+}
+Transform {
+ inputs 0
+ translate {536 289}
+ center {1024 540}
+ shutteroffset centred
+ name Transform3
+ xpos -854
+ ypos 6346
+}
+Read {
+ inputs 0
+ file /Volumes/af/show/ollie/shots/AR/AR_4000/publish/main/v000/v003/render/output/AR_4000_main_v000_output_v003.%05d.exr
+ format "2048 1152 0 0 2048 1152 1 ollie_2048x1152"
+ first 1009
+ last 1070
+ origfirst 1009
+ origlast 1070
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_ENTITY_NAME
+ value2 AR_4000
+ key3 LOOK
+ key4 AF_SEQUENCE_NAME
+ value4 AR
+ name Read5
+ xpos 1880
+ ypos 5549
+ addUserKnob {20 "Publish Info"}
+ addUserKnob {1 sg_project l project}
+ sg_project ollie
+ addUserKnob {1 sg_entity_type l "entity type"}
+ sg_entity_type Shot
+ addUserKnob {1 sg_entity_code l "entity code"}
+ sg_entity_code AR_4000
+ addUserKnob {22 sg_lock_entity l "Lock to Current" T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(True)" +STARTLINE}
+ addUserKnob {22 sg_lock_entity_from_publish l "Lock to Publish" -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(True, publish=True)"}
+ addUserKnob {22 sg_clear_entity l Clear -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(False)"}
+ addUserKnob {26 ""}
+ addUserKnob {1 sg_variation l variation}
+ sg_variation main
+ addUserKnob {1 sg_step.Step.short_name l step}
+ sg_step.Step.short_name v000
+ addUserKnob {1 sg_layer l layer}
+ sg_layer output
+ addUserKnob {6 sg_layer_glob l "glob search" t "Match using Unix shell-style wildcards :\n<b>*</b> matches everything\n<b>?</b> matches any single character\n<b>\[<i>seq</i>]</b> matches any character in <i>seq</i>\n<b>\[!<i>seq</i>]</b> matches any character not in <i>seq</i>\n\nAlso supports \"!\", \"&&\" and \"||\" operators.\n" -STARTLINE}
+ addUserKnob {1 sg_sublayer l sublayer}
+ addUserKnob {6 sg_sublayer_glob l "glob search" t "Match using Unix shell-style wildcards :\n<b>*</b> matches everything\n<b>?</b> matches any single character\n<b>\[<i>seq</i>]</b> matches any character in <i>seq</i>\n<b>\[!<i>seq</i>]</b> matches any character not in <i>seq</i>\n\nAlso supports \"!\", \"&&\" and \"||\" operators.\n" -STARTLINE}
+ addUserKnob {1 sg_channel l channel}
+ addUserKnob {1 sg_publish_type l publish_type}
+ sg_publish_type render
+ addUserKnob {1 sg_extension l extension}
+ sg_extension exr
+ addUserKnob {1 sg_path l path +DISABLED}
+ sg_path /Volumes/af/show/ollie/shots/AR/AR_4000/publish/main/v000/v003/render/output/AR_4000_main_v000_output_v003.%05d.exr
+ addUserKnob {26 ""}
+ addUserKnob {1 sg_force_version l "force version"}
+ addUserKnob {6 sg_greatest_only l "greatest only" +STARTLINE}
+ addUserKnob {6 sg_fullrange_only l "fullrange only" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {22 sg_auto_update l Update -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).auto_update()"}
+ addUserKnob {22 sg_browse l Browse -STARTLINE T "from afnuke.build import NukePublishBrowserDialog; NukePublishBrowserDialog.create(node=nuke.thisNode())"}
+}
+Dot {
+ name Dot12
+ xpos 1914
+ ypos 5911
+}
+set N76c2b80 [stack 0]
+Dot {
+ name Dot13
+ xpos 1796
+ ypos 5957
+}
+Transform {
+ translate {{"Transform5.translate * control3.f + Transform6.translate * (1-control3.f)"} {"Transform5.translate * control3.f + Transform6.translate * (1-control3.f)"}}
+ rotate {{"Transform5.rotate * control3.f + Transform6.rotate * (1-control3.f)"}}
+ scale {{"Transform5.scale * control3.f + Transform6.scale * (1-control3.f)"}}
+ skewX {{"Transform5.skew * control3.f + Transform6.skew * (1-control3.f)"}}
+ skewY {{"Transform5.skew * control3.f + Transform6.skew * (1-control3.f)"}}
+ center {{"Transform5.center * control3.f + Transform6.center * (1-control3.f)"} {"Transform5.center * control3.f + Transform6.center * (1-control3.f)"}}
+ shutteroffset centred
+ name Transform7
+ xpos 1762
+ ypos 6240
+}
+Dot {
+ name Dot14
+ xpos 1793
+ ypos 6406
+}
+StickyNote {
+ inputs 0
+ name StickyNote4
+ label "matrix magic!"
+ xpos 1240
+ ypos 5810
+}
+push $N796c980
+Dot {
+ name Dot2
+ xpos 3827
+ ypos 5761
+}
+TimeWarp {
+ lookup {{TimeWarp1.lookup(TimeWarp2.lookup) C x1001 1001 x1100 1100}}
+ time ""
+ filter none
+ name TimeWarp3
+ xpos 3793
+ ypos 5902
+}
+Dot {
+ name Dot8
+ xpos 3827
+ ypos 6066
+}
+StickyNote {
+ inputs 0
+ name StickyNote5
+ label manual
+ xpos 10824
+ ypos 6667
+}
+StickyNote {
+ inputs 0
+ name StickyNote6
+ label automatic
+ xpos 10985
+ ypos 6631
+}
+Camera2 {
+ inputs 0
+ translate {{parent.DotC.input.translate} {parent.DotC.input.translate} {parent.DotC.input.translate}}
+ rotate {{parent.DotC.input.rotate} {parent.DotC.input.rotate} {parent.DotC.input.rotate}}
+ focal {{parent.DotC.input.focal}}
+ haperture {{parent.DotC.input.haperture}}
+ vaperture {{parent.DotC.input.vaperture}}
+ win_translate {{parent.DotC.input.win_translate} {parent.DotC.input.win_translate}}
+ name Cam_C
+ tile_color 0x323232ff
+ xpos 8509
+ ypos 6002
+}
+StickyNote {
+ inputs 0
+ name StickyNote7
+ label breaks
+ xpos -6013
+ ypos 5616
+}
+Group {
+ inputs 0
+ name Group1
+ label "FLICKERY PLATE"
+ xpos -6102
+ ypos 5491
+ postage_stamp true
+}
+ Noise {
+  inputs 0
+  cliptype none
+  size 3300
+  zoffset {{frame*12}}
+  gain 0.455
+  gamma 0.465
+  center {2048 1556}
+  name Noise1
+  xpos -1218
+  ypos 656
+ }
+ Blur {
+  channels rgba
+  size 100
+  name Blur1
+  xpos -1218
+  ypos 688
+ }
+ Read {
+  inputs 0
+  file /Volumes/af/show/default/shots/color/color_000/publish/main/precomp/v001/render/plt01_/color_000_main_precomp_plt01__v001_%v.%05d.exr
+  format "2048 1080 0 0 2048 1080 1 2K_DCP"
+  first 1001
+  last 1100
+  origfirst 1001
+  origlast 1100
+  origset true
+  auto_alpha true
+  key1 AF_ENTITY_TYPE
+  value1 shot
+  key2 AF_SEQUENCE_NAME
+  value2 color
+  key3 AF_ENTITY_NAME
+  value3 color_000
+  key4 LOOK
+  name Read3
+  xpos -798
+  ypos 409
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix 0.51
+  name Merge1
+  xpos -1022
+  ypos 710
+ }
+ Output {
+  name Output1
+  xpos -1022
+  ypos 809
+ }
+end_group
+RotoPaint {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44800000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse2 512 bezier
+     {{cc
+       {f 8192}
+       {px x44840000
+        {xc2ae85a0 0}
+        {x44b90000 x44118000}
+        {x42ae85a0 0}
+        {0 xc2848c60}
+        {x44ccc000 x442f8000}
+        {0 x42848c60}
+        {x42ae85a0 0}
+        {x44b90000 x444d8000}
+        {xc2ae85a0 0}
+        {0 x42848c60}
+        {x44a54000 x442f8000}
+        {0 xc2848c60}}}
+      {cc
+       {f 8192}
+       {px x44840000
+        {xc2ae85a0 0}
+        {0 xc3370000}
+        {x42ae85a0 0}
+        {0 xc2848c60}
+        {x43370000 0}
+        {0 x42848c60}
+        {x42ae85a0 0}
+        {0 x43370000}
+        {xc2ae85a0 0}
+        {0 x42848c60}
+        {xc3370000 0}
+        {0 xc2848c60}}}}
+     {tx x44840000 x44b90000 x442f8000}
+     {a opc x3d1374bc osw x41200000 osf 0 str 1 spx x44800000 spy x44070000 sb 1 nv x40000000 view2 x40000000 ltn x44840000 ltm x44840000 ltt x40000000 tt x40e00000}}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {px x447ec000
+        {xc29f0ee0 0}
+        {x44924000 x44154000}
+        {x429f0ee0 0}
+        {0 xc27bd780}
+        {x44a44000 x4431c000}
+        {0 x427bd780}
+        {x429f0ee0 0}
+        {x44924000 x444e4000}
+        {xc29f0ee0 0}
+        {0 x427bd780}
+        {x44804000 x4431c000}
+        {0 xc27bd780}}}
+      {cc
+       {f 8192}
+       {p
+        {{{x447ec000 xc29f0ee0}}
+      {{x447ec000 0}}}
+        {{{x447ec000 0}}
+      {{x447ec000 0}}}
+        {{{x447ec000 x429f0ee0}}
+      {{x447ec000 0}}}
+        {{{x447ec000 0}}
+      {{x447ec000 xc27bd780}}}
+        {{{x447ec000 0}}
+      {{x447ec000 0}}}
+        {{{x447ec000 0}}
+      {{x447ec000 x427bd780}}}
+        {{{x447ec000 x429f0ee0}}
+      {{x447ec000 0}}}
+        {{{x447ec000 0}}
+      {{x447ec000 0}}}
+        {{{x447ec000 xc29f0ee0}}
+      {{x447ec000 0}}}
+        {{{x447ec000 0}}
+      {{x447ec000 x427bd780}}}
+        {{{x447ec000 0}}
+      {{x447ec000 0}}}
+        {{{x447ec000 0}}
+      {{x447ec000 xc27bd780}}}}}}
+     {tx x447ec000 x44924000 x4431c000}
+     {a opc x3d1374bc osw x41200000 osf 0 str 1 spx x44800000 spy x44070000 sb 1 nv x40000000 view2 x40000000 ltn x447ec000 ltm x447ec000 ltt x40000000 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1024 540}
+ colorOverlay {0 0 0 0}
+ opacity 0.036
+ lifetime_start 1056
+ lifetime_end 1056
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name RotoPaint2
+ xpos -6102
+ ypos 5616
+ disable true
+}
+Dot {
+ name Dot6
+ xpos -6061
+ ypos 5940
+}
+set N89c1900 [stack 0]
+Dot {
+ name Dot4
+ xpos -6164
+ ypos 5940
+}
+set N895c2b0 [stack 0]
+Dot {
+ name Dot3
+ xpos -6353
+ ypos 5940
+}
+TimeBlur {
+ shutter {{divisions}}
+ shutteroffset centred
+ shuttercustomoffset 0
+ name TimeBlur1
+ xpos -6387
+ ypos 6012
+}
+Blur {
+ channels rgba
+ size 100
+ name Blur3
+ xpos -6387
+ ypos 6038
+}
+push $N895c2b0
+Blur {
+ channels rgba
+ size 100
+ name Blur5
+ xpos -6198
+ ypos 6003
+}
+set N8a6b610 [stack 0]
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge5
+ xpos -6294
+ ypos 6093
+}
+Dot {
+ name Dot5
+ xpos -6260
+ ypos 6127
+}
+push $N89c1900
+Merge2 {
+ inputs 2
+ operation multiply
+ output rgb
+ name Merge6
+ xpos -6095
+ ypos 6123
+}
+AFWrite {
+ name AFWrite
+ label "\[value step] : \[lindex \[value publish_layer] \[expr \{\[numvalue publish_layer] + 1\}]]"
+ xpos -6095
+ ypos 6440
+ channels rgb
+ views {left right}
+ variation {{0} main}
+ publish_layer {{1} bfd_neutralgrades class output}
+ framerange 1001-1170
+ chunk 6
+ comment "deflickered - for class"
+ file /Volumes/af/show/default/shots/color/color_000/publish/main/comp/v004/render/class/color_000_main_comp_class_v004_%v.%05d.exr
+}
+Read {
+ inputs 0
+ file /Volumes/af/show/default/shots/color/color_000/publish/main/comp/v004/render/class/color_000_main_comp_class_v004_%v.%05d.exr
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 1001
+ last 1170
+ origfirst 1001
+ origlast 1170
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 color
+ key3 AF_ENTITY_NAME
+ value3 color_000
+ key4 LOOK
+ name Read1
+ xpos -6099
+ ypos 6513
+}
+Axis2 {
+ inputs 0
+ translate {{"parent.Axis3.translate * control.f \n\n + \n\nparent.Axis4.translate * (1-control.f) "} {"parent.Axis3.translate * control.f \n\n + \n\nparent.Axis4.translate * (1-control.f) "} {"parent.Axis3.translate * control.f \n\n + \n\nparent.Axis4.translate * (1-control.f) "}}
+ name Axis5
+ label "\[file tail \[value file]]\n\[file tail \[lindex \[value fbx_node_name] \[expr \{\[numvalue fbx_node_name] + 1\}]]]"
+ xpos -976
+ ypos 6007
+}
+Axis2 {
+ inputs 0
+ translate {0 100 0}
+ name Axis4
+ label "\[file tail \[value file]]\n\[file tail \[lindex \[value fbx_node_name] \[expr \{\[numvalue fbx_node_name] + 1\}]]]"
+ xpos -796
+ ypos 5749
+}
+Axis2 {
+ inputs 0
+ translate {100 0 0}
+ name Axis3
+ label "\[file tail \[value file]]\n\[file tail \[lindex \[value fbx_node_name] \[expr \{\[numvalue fbx_node_name] + 1\}]]]"
+ xpos -1214
+ ypos 5741
+}
+Scene {
+ inputs 3
+ name Scene3
+ xpos -976
+ ypos 5869
+}
+NoOp {
+ inputs 0
+ name control
+ xpos -1221
+ ypos 6026
+ addUserKnob {20 User}
+ addUserKnob {7 f}
+ f 0.445
+}
+NoOp {
+ inputs 0
+ name control2
+ xpos -1257
+ ypos 6348
+ addUserKnob {20 User}
+ addUserKnob {7 f}
+ f 0.5
+}
+Transform {
+ inputs 0
+ translate {{"Transform2.translate * control2.f + Transform3.translate * (1-control2.f)"} {"Transform2.translate * control2.f + Transform3.translate * (1-control2.f)"}}
+ rotate {{"Transform2.rotate * control2.f + Transform3.rotate * (1-control2.f)"}}
+ scale {{"Transform2.scale * control2.f + Transform3.scale * (1-control2.f)"}}
+ skewX {{"Transform2.skew * control2.f + Transform3.skew * (1-control2.f)"}}
+ skewY {{"Transform2.skew * control2.f + Transform3.skew * (1-control2.f)"}}
+ center {{"Transform2.center * control2.f + Transform3.center * (1-control2.f)"} {"Transform2.center * control2.f + Transform3.center * (1-control2.f)"}}
+ shutteroffset centred
+ name Transform4
+ xpos -1041
+ ypos 6423
+}
+Group {
+ inputs 0
+ name MrParallax
+ tile_color 0xff0000
+ xpos -1058
+ ypos 6674
+ addUserKnob {20 User}
+ addUserKnob {41 A T MrParallax1.A}
+ addUserKnob {41 B T MrParallax1.B}
+ addUserKnob {41 X T MrParallax1.X}
+ addUserKnob {41 P T MrParallax1.P}
+ addUserKnob {1 publish_resource_layer l "Publish Resource Layer" +INVISIBLE}
+ addUserKnob {6 publish_node l "Publish Node" -STARTLINE +INVISIBLE}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -908
+  ypos 553
+ }
+ NoOp {
+  name MrParallax1
+  xpos -908
+  ypos 621
+  addUserKnob {20 MrParallax}
+  addUserKnob {12 A}
+  A {485 228}
+  addUserKnob {12 B}
+  B {989 700}
+  addUserKnob {12 X}
+  X {{A+P*(B-A) x1056 989.5200195 x1152 990.9890747 x1264 993.1500244} {A+P*(B-A) x1056 619.0549927 x1152 278.9949951 x1264 98.99499512}}
+  addUserKnob {7 P t "Relative Position. \n0=A\n1=B\n\nAlso works with numbers outside of \[0,1]" R -2 2}
+  P 1.28
+  addUserKnob {1 publish_resource_layer l "Publish Resource Layer" +INVISIBLE}
+  addUserKnob {6 publish_node l "Publish Node" -STARTLINE +INVISIBLE}
+  publish_node true
+ }
+ Output {
+  name Output1
+  xpos -908
+  ypos 721
+ }
+end_group
+Axis2 {
+ inputs 0
+ translate {{curve i x1008 84207.5625 x1071 84161.8125} {curve i x1008 1355.076538 x1071 1354.653076} {curve i x1008 40947.87109 x1071 40978.29297}}
+ name Axis2
+ label "\[file tail \[value file]]\n\[file tail \[lindex \[value fbx_node_name] \[expr \{\[numvalue fbx_node_name] + 1\}]]]"
+ xpos 1241
+ ypos 5744
+}
+set N76f21a0 [stack 0]
+Camera2 {
+ inputs 0
+ translate {{curve x1008 84239.43148 84238.77582 84238.12098 84237.42101 84236.69201 84235.95137 84235.28311 84234.62298 84233.97811 84233.29444 84232.6828 84232.03321 84231.34682 84230.66698 84229.99426 84229.34036 84228.65904 84227.91733 84227.18987 84226.42111 84225.65795 84224.90768 84224.1575 84223.39794 84222.63069 84221.9494 84221.21005 84220.60383 84219.94665 84219.26772 84218.56634 84217.88055 84217.15561 84216.4459 84215.7662 84214.99373 84214.4468 84213.8035 84213.12746 84212.46051 84211.77509 84211.08353 84210.365 84209.75877 84209.16525 84208.4967 84207.8944 84207.29973 84206.70465 84206.11829 84205.51996 84204.92737 84204.38158 84203.83302 84203.2725 84202.7504 84202.26541 84201.7725 84201.27504 84200.76477 84200.26296 84199.77875 84199.33577 84198.9009} {curve x1008 1388.811121 1388.706626 1388.616727 1388.542899 1388.515571 1388.426948 1388.317998 1388.265716 1388.148813 1388.034237 1387.912193 1387.799235 1387.722192 1387.646621 1387.566478 1387.505423 1387.477272 1387.478112 1387.491239 1387.552676 1387.66344 1387.8293 1388.006844 1388.119713 1388.143893 1388.123513 1388.005586 1387.96614 1387.893644 1387.933503 1387.971715 1388.023036 1388.048806 1388.05619 1388.027182 1387.882633 1387.825597 1387.743707 1387.725937 1387.720447 1387.761572 1387.744175 1387.709251 1387.737605 1387.764148 1387.783633 1387.797403 1387.79042 1387.819638 1387.841631 1387.848138 1387.863148 1387.83103 1387.783745 1387.744809 1387.737569 1387.729177 1387.735473 1387.750507 1387.761797 1387.779014 1387.799246 1387.821862 1387.8492} {curve x1008 40859.29416 40859.83391 40860.36968 40860.93742 40861.51415 40862.11188 40862.68054 40863.25307 40863.75714 40864.31375 40864.8563 40865.39801 40865.96717 40866.52902 40867.08458 40867.65215 40868.22499 40868.86353 40869.45228 40870.04723 40870.62985 40871.1872 40871.72798 40872.28233 40872.8608 40873.43659 40874.02434 40874.4966 40875.02951 40875.5723 40876.13635 40876.69196 40877.25922 40877.81076 40878.3184 40878.91632 40879.34426 40879.86454 40880.37316 40880.88179 40881.39867 40881.92631 40882.44604 40882.93398 40883.44186 40883.98132 40884.49911 40885.01228 40885.51424 40886.02774 40886.54773 40887.04014 40887.49659 40887.93356 40888.38246 40888.78694 40889.15955 40889.53699 40889.91271 40890.28567 40890.62996 40890.96335 40891.26289 40891.5587}}
+ rotate {{curve x1008 -19.71524251 -20.34248191 -21.15905573 -22.01129492 -22.19953217 -21.48608122 -19.84132998 -17.53125686 -17.18987587 -17.40247902 -18.16373258 -19.01195439 -19.53731402 -20.25973974 -21.28611663 -22.3277897 -23.44464821 -23.46007122 -22.48870413 -22.32192788 -22.06881036 -22.08431659 -22.69095804 -23.0456676 -22.61362862 -21.03197436 -19.43066097 -20.47300821 -22.04278127 -23.15914059 -24.02821149 -24.37621461 -23.4393426 -21.1248449 -18.69119061 -17.7955705 -18.14931084 -19.59612457 -20.82952278 -22.32635192 -23.17266977 -23.15123053 -23.56581417 -23.91127086 -23.17143172 -22.11610903 -21.896932 -22.16616314 -23.2411418 -24.47120439 -24.87459009 -24.00692905 -23.03244293 -23.0239394 -22.89627115 -22.41393023 -22.18841305 -22.23465218 -22.21719536 -21.83499122 -20.99030234 -19.91454013 -19.37109255 -19.3879054} {curve x1008 160.2119396 160.5691409 160.4533467 159.8351891 158.9028639 158.3271935 158.5753674 159.9896361 160.5339919 159.7689359 160.2355856 160.5395637 160.5122107 160.3385774 160.2118971 159.8737983 159.0551354 157.646295 157.0053305 156.9812773 156.8335003 156.44534 156.1273684 156.2192614 156.5883216 157.666385 157.7432804 158.1202038 158.43089 158.7377504 158.6917996 158.2995863 157.6713349 156.6808169 155.7730524 155.6113289 155.6167399 156.2743094 156.7666234 157.1344785 157.5813846 158.046263 157.7314358 157.5425442 157.700515 157.7955449 157.8720609 158.0912268 158.0531805 157.6846677 156.9282145 155.965545 155.4500403 155.2209682 155.0905272 155.1553371 155.2693691 155.4248653 155.6984649 156.0629324 156.3294751 156.5295956 156.7804068 156.8491813} {curve x1008 -1.679113633 -2.095690533 -2.312349362 -2.623167783 -2.368659777 -1.116353167 0.7372185278 3.001754225 2.905953025 1.658905219 0.6821712565 -1.209185629 -2.117914684 -1.853743366 -1.436435358 -1.219281376 -1.248866837 -1.06972168 -0.02285405019 0.9789873326 1.21946934 1.204408459 1.468506258 1.826847431 1.770597799 2.292849744 2.431996135 1.315637598 -0.9728508804 -1.961956522 -2.042161796 -2.270174367 -1.88229579 -0.5716812854 1.214581035 2.837516045 2.551876078 1.268478711 -0.2072832879 -1.754005106 -2.641829026 -2.211629518 -1.609901909 -1.324052342 -0.5775746636 0.3625982463 0.45083821 0.3560848167 0.5335497548 0.6859893579 0.5425550176 0.5313179291 0.7570200647 0.3955562892 0.2990561701 0.7383852285 0.5517574481 0.08587760211 -0.1614166132 -0.1323752745 0.5502887345 1.861466577 2.971055799 3.509933172}}
+ scaling {{curve x1008 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1008 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1008 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ uniform_scale {{curve x1008 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ skew {{curve x1008 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1008 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1008 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ pivot {{curve x1008 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1008 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1008 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal {{curve x1008 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24}}
+ haperture {{curve x1008 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986 29.03219986}}
+ vaperture {{curve x1008 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285 16.32829285}}
+ far 1000
+ win_translate {{curve x1008 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1008 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal_point {{curve x1008 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5}}
+ fstop {{curve x1008 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905}}
+ file /Volumes/af/show/ollie/shots/AR/AR_4000/publish/main/matchmove/v002/export/AR_4000_main_matchmove_v002_export_camera.abc
+ suppress_dialog true
+ name Camera7
+ label "\[file tail \[value file]]"
+ xpos 1601
+ ypos 5536
+ addUserKnob {20 "Publish Info"}
+ addUserKnob {1 sg_project l project}
+ addUserKnob {1 sg_entity_type l "entity type"}
+ addUserKnob {1 sg_entity_code l "entity code"}
+ addUserKnob {22 sg_lock_entity l "Lock to Current" T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(True)" +STARTLINE}
+ addUserKnob {22 sg_lock_entity_from_publish l "Lock to Publish" -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(True, publish=True)"}
+ addUserKnob {22 sg_clear_entity l Clear -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(False)"}
+ addUserKnob {26 ""}
+ addUserKnob {1 sg_variation l variation}
+ sg_variation main
+ addUserKnob {1 sg_step.Step.short_name l step}
+ sg_step.Step.short_name matchmove
+ addUserKnob {1 sg_layer l layer}
+ addUserKnob {6 sg_layer_glob l "glob search" t "Match using Unix shell-style wildcards :\n<b>*</b> matches everything\n<b>?</b> matches any single character\n<b>\[<i>seq</i>]</b> matches any character in <i>seq</i>\n<b>\[!<i>seq</i>]</b> matches any character not in <i>seq</i>\n\nAlso supports \"!\", \"&&\" and \"||\" operators.\n" -STARTLINE}
+ addUserKnob {1 sg_sublayer l sublayer}
+ sg_sublayer camera
+ addUserKnob {6 sg_sublayer_glob l "glob search" t "Match using Unix shell-style wildcards :\n<b>*</b> matches everything\n<b>?</b> matches any single character\n<b>\[<i>seq</i>]</b> matches any character in <i>seq</i>\n<b>\[!<i>seq</i>]</b> matches any character not in <i>seq</i>\n\nAlso supports \"!\", \"&&\" and \"||\" operators.\n" -STARTLINE}
+ addUserKnob {1 sg_channel l channel +HIDDEN}
+ addUserKnob {1 sg_publish_type l publish_type}
+ sg_publish_type export
+ addUserKnob {1 sg_extension l extension}
+ sg_extension abc
+ addUserKnob {1 sg_path l path +DISABLED}
+ sg_path /Volumes/af/show/ollie/shots/AR/AR_4000/publish/main/matchmove/v002/export/AR_4000_main_matchmove_v002_export_camera.abc
+ addUserKnob {26 ""}
+ addUserKnob {1 sg_force_version l "force version"}
+ addUserKnob {6 sg_greatest_only l "greatest only" +STARTLINE}
+ addUserKnob {6 sg_fullrange_only l "fullrange only" +HIDDEN +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {22 sg_auto_update l Update -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).auto_update()"}
+ addUserKnob {22 sg_browse l Browse -STARTLINE T "from afnuke.build import NukePublishBrowserDialog; NukePublishBrowserDialog.create(node=nuke.thisNode())"}
+}
+set N76f1c60 [stack 0]
+push $N76f1c60
+Axis2 {
+ translate {0 0 -100}
+ name Axis1
+ label "\[file tail \[value file]]\n\[file tail \[lindex \[value fbx_node_name] \[expr \{\[numvalue fbx_node_name] + 1\}]]]"
+ xpos 1435
+ ypos 5616
+}
+Scene {
+ inputs 3
+ name Scene2
+ xpos 1601
+ ypos 5744
+}
+push $N76f21a0
+push $N76f1c60
+push 0
+Reconcile3D {
+ inputs 3
+ output {{curve x1009 1034.858154 1031.651611 1013.980957 988.7775879 975.3692627 984.774353 1022.399475 1038.865112 1020.140442 1036.810913 1047.314941 1047.134155 1042.891479 1040.233398 1031.91626 1009.657837 971.2628174 956.2061768 957.0413208 953.2200928 942.5068359 934.1647339 937.6036377 947.5127563 978.2490234 978.2271729 991.4274902 1000.229248 1007.227539 1005.765076 995.0749512 980.0755615 956.3583984 931.8481445 924.7474976 928.3200073 950.4476929 964.8464966 974.2070312 985.0510864 999.8407593 992.1087646 988.7844849 997.4923096 1003.055237 1007.434631 1015.630249 1017.623474 1010.159729 991.3775635 966.4122925 954.8730469 950.3104248 949.0224609 954.2402954 960.0257568 966.776123 977.0058594 989.5284424 1000.539795 1009.360107 1018.868042} {curve x1009 596.3084106 621.5869751 646.6956787 651.0142212 630.8876953 585.0968628 516.8166504 507.6895142 516.4088135 540.4189453 567.5342407 584.1782227 606.1847534 637.2097168 668.4380493 700.980957 699.5644531 670.5910645 664.9874268 655.2675781 652.5564575 667.604126 676.2631836 662.1126709 614.9613647 568.9801025 599.5481567 645.7602539 677.7553101 702.4126587 711.0318604 681.6993408 613.0327759 543.6616821 521.5043335 532.8781738 574.6043091 609.6235962 652.6855469 676.7279663 677.074646 689.6292725 699.6295166 677.7037354 646.3179932 639.5162354 647.5871582 679.0166016 715.3041992 727.206543 701.3109131 673.4746094 674.1555786 671.2963257 658.4869995 652.7642212 654.5863037 654.6677246 644.3178101 620.4874878 589.8995972 574.7779541}}
+ outputxyz {{curve x1009 84206.83594 84206.10938 84205.38281 84204.65625 84203.92969 84203.20312 84202.47656 84201.75 84201.02344 84200.29688 84199.57812 84198.85156 84198.125 84197.39844 84196.67188 84195.94531 84195.21875 84194.49219 84193.76562 84193.03906 84192.3125 84191.58594 84190.85938 84190.13281 84189.40625 84188.67969 84187.95312 84187.22656 84186.5 84185.77344 84185.04688 84184.32812 84183.60156 84182.875 84182.14844 84181.42188 84180.69531 84179.96875 84179.24219 84178.51562 84177.78906 84177.0625 84176.33594 84175.60938 84174.88281 84174.15625 84173.42969 84172.70312 84171.97656 84171.25 84170.52344 84169.79688 84169.07812 84168.35156 84167.625 84166.89844 84166.17188 84165.44531 84164.71875 84163.99219 84163.26562 84162.53906} {curve x1009 1355.069824 1355.06311 1355.056396 1355.049683 1355.042969 1355.036255 1355.029541 1355.022705 1355.015991 1355.009277 1355.002563 1354.99585 1354.989136 1354.982422 1354.975708 1354.968994 1354.96228 1354.955566 1354.948853 1354.942139 1354.935425 1354.928711 1354.921997 1354.915161 1354.908447 1354.901733 1354.89502 1354.888306 1354.881592 1354.874878 1354.868164 1354.86145 1354.854736 1354.848022 1354.841309 1354.834595 1354.827881 1354.821167 1354.814453 1354.807617 1354.800903 1354.794189 1354.787476 1354.780762 1354.774048 1354.767334 1354.76062 1354.753906 1354.747192 1354.740479 1354.733765 1354.727051 1354.720337 1354.713623 1354.706909 1354.700073 1354.693359 1354.686646 1354.679932 1354.673218 1354.666504 1354.65979} {curve x1009 40948.35547 40948.83594 40949.32031 40949.80078 40950.28516 40950.76953 40951.25 40951.73438 40952.21875 40952.69922 40953.18359 40953.66406 40954.14844 40954.63281 40955.11328 40955.59766 40956.08203 40956.5625 40957.04688 40957.52734 40958.01172 40958.49609 40958.97656 40959.46094 40959.94141 40960.42578 40960.91016 40961.39062 40961.875 40962.35938 40962.83984 40963.32422 40963.80469 40964.28906 40964.77344 40965.25391 40965.73828 40966.22266 40966.70312 40967.1875 40967.66797 40968.15234 40968.63672 40969.11719 40969.60156 40970.08203 40970.56641 40971.05078 40971.53125 40972.01562 40972.5 40972.98047 40973.46484 40973.94531 40974.42969 40974.91406 40975.39453 40975.87891 40976.36328 40976.84375 40977.32812 40977.80859}}
+ shutteroffset centred
+ name Reconcile3D1
+ xpos 1418
+ ypos 5915
+}
+push $N76c2b80
+Tracker3 {
+ track1 {{parent.Reconcile3D1.output.right} {parent.Reconcile3D1.output.right}}
+ offset1 {0 0}
+ pattern1 {-32 -32 32 32}
+ search1 {-22 -22 22 22}
+ track2 {1126 474}
+ offset2 {0 0}
+ pattern2 {-32 -32 32 32}
+ search2 {-22 -22 22 22}
+ track3 {1126 678}
+ offset3 {0 0}
+ pattern3 {-32 -32 32 32}
+ search3 {-22 -22 22 22}
+ track4 {922 678}
+ offset4 {0 0}
+ pattern4 {-32 -32 32 32}
+ search4 {-22 -22 22 22}
+ transform "remove jitter"
+ translate {{curve x1 0 x1009 0 x1010 2.073974609 20.10888672 43.9743042 57.56011963 49.28753662 12.77825928 -2.665405273 18.44580078 5.696960449 -1.689880371 -2.737365723 -4.512268066 -9.292785645 -7.059265137 6.626037598 34.73474121 39.83404541 30.328125 28.5144043 34.34680176 41.03167725 40.22601318 34.9552002 8.64831543 12.47515869 2.690185547 -4.093933105 -11.61553955 -12.22259521 -6.071472168 6.402526855 27.70324707 49.84783936 54.93237305 50.8213501 28.42407227 14.81689453 9.195861816 4.825195312 -2.44732666 13.22180176 22.6529541 18.06451416 14.06262207 7.988769531 -4.294799805 -10.08795166 -6.238891602 8.611206055 29.66473389 37.50775146 38.55908203 37.29296875 31.20062256 27.04992676 25.06829834 20.65625 14.36621094 9.704467773 6.759399414 2.600708008} {curve x1 0 x1009 0 x1010 -32.50512695 -65.67010498 -77.25219727 -62.20654297 -19.03161621 48.14593506 55.87280273 46.29119873 23.86499023 3.121826172 -3.115966797 -11.14294434 -27.86810303 -46.47296143 -68.8215332 -58.30780029 -20.9630127 -10.27502441 -2.577758789 -8.90826416 -33.17706299 -46.72741699 -31.92565918 18.62799072 69.67871094 41.75994873 -9.413208008 -53.46289062 -90.90283203 -106.9841309 -77.14031982 -7.557800293 62.44281006 84.50683594 70.82952881 27.15771484 -6.231567383 -43.41436768 -58.12438965 -47.74273682 -49.8692627 -50.37750244 -18.84436035 19.31604004 28.3526001 19.95440674 -12.88171387 -51.74505615 -65.39434814 -38.91271973 -9.706420898 -9.743652344 -10.03894043 -5.849304199 -12.60894775 -25.93408203 -34.98791504 -33.67230225 -18.61639404 4.361633301 12.39355469}}
+ center {{curve x1009 1034.858154 1031.651611 1013.980957 988.7775879 975.3692627 984.774353 1022.399475 1038.865112 1020.140442 1036.810913 1047.314941 1047.134155 1042.891479 1040.233398 1031.91626 1009.657837 971.2628174 956.2061768 957.0413208 953.2200928 942.5068359 934.1647339 937.6036377 947.5127563 978.2490234 978.2271729 991.4274902 1000.229248 1007.227539 1005.765076 995.0749512 980.0755615 956.3583984 931.8481445 924.7474976 928.3200073 950.4476929 964.8464966 974.2070312 985.0510864 999.8407593 992.1087646 988.7844849 997.4923096 1003.055237 1007.434631 1015.630249 1017.623474 1010.159729 991.3775635 966.4122925 954.8730469 950.3104248 949.0224609 954.2402954 960.0257568 966.776123 977.0058594 989.5284424 1000.539795 1009.360107 1018.868042} {curve x1009 596.3084106 621.5869751 646.6956787 651.0142212 630.8876953 585.0968628 516.8166504 507.6895142 516.4088135 540.4189453 567.5342407 584.1782227 606.1847534 637.2097168 668.4380493 700.980957 699.5644531 670.5910645 664.9874268 655.2675781 652.5564575 667.604126 676.2631836 662.1126709 614.9613647 568.9801025 599.5481567 645.7602539 677.7553101 702.4126587 711.0318604 681.6993408 613.0327759 543.6616821 521.5043335 532.8781738 574.6043091 609.6235962 652.6855469 676.7279663 677.074646 689.6292725 699.6295166 677.7037354 646.3179932 639.5162354 647.5871582 679.0166016 715.3041992 727.206543 701.3109131 673.4746094 674.1555786 671.2963257 658.4869995 652.7642212 654.5863037 654.6677246 644.3178101 620.4874878 589.8995972 574.7779541}}
+ shutteroffset centred
+ name Tracker1
+ xpos 1880
+ ypos 5986
+}
+Transform {
+ inputs 0
+ translate {{parent.Tracker1.translate.right} {parent.Tracker1.translate.right}}
+ center {1024 540}
+ shutteroffset centred
+ name Transform5
+ xpos 1978
+ ypos 6084
+}
+Transform {
+ inputs 0
+ center {1024 540}
+ shutteroffset centred
+ name Transform6
+ xpos 2004
+ ypos 6228
+}
+NoOp {
+ inputs 0
+ name control3
+ xpos 1594
+ ypos 6241
+ addUserKnob {20 User}
+ addUserKnob {7 f}
+ f {{curve x1030 0 x1052 1}}
+}
+Camera2 {
+ inputs 0
+ translate {{Dot9.input.translate(TimeWarp4.lookup)} {Dot9.input.translate(TimeWarp4.lookup)} {Dot9.input.translate(TimeWarp4.lookup)}}
+ rotate {{Dot9.input.rotate(TimeWarp4.lookup)} {Dot9.input.rotate(TimeWarp4.lookup)} {Dot9.input.rotate(TimeWarp4.lookup)}}
+ focal {{Dot9.input.focal(TimeWarp4.lookup)}}
+ haperture {{Dot9.input.haperture(TimeWarp4.lookup)}}
+ vaperture {{Dot9.input.vaperture(TimeWarp4.lookup)}}
+ focal_point {{Dot9.input.focal_point(TimeWarp4.lookup)}}
+ name ReTimedCamera
+ xpos 5373
+ ypos 5930
+}
+Text {
+ inputs 0
+ font /usr/share/fonts/bitstream-vera/Vera.ttf
+ size 98
+ yjustify center
+ Transform 1
+ box {300 163 1740 934}
+ center {1440 1080}
+ name Text2
+ xpos 5868
+ ypos 5888
+}
+TimeWarp {
+ lookup {{curve C x1001 1001 x1010.297974 1058.527771 x1024.988525 1028.145635 x1035.960083 1072.7694 x1069.805054 1026.879716 x1080.218628 1074.668278 x1090.260376 1034.15877 x1097.69873 1097.296618}}
+ time ""
+ name TimeWarp4
+ xpos 5868
+ ypos 5937
+}
+Camera2 {
+ inputs 0
+ name Camera5
+ xpos 8415
+ ypos 5719
+}
+Dot {
+ name DotE
+ tile_color 0xff0000ff
+ label DotE
+ xpos 8439
+ ypos 5793
+}
+Camera2 {
+ inputs 0
+ name Camera4
+ xpos 8234
+ ypos 5719
+}
+Dot {
+ name DotD
+ tile_color 0xff0000ff
+ label DotD
+ xpos 8258
+ ypos 5793
+}
+Camera2 {
+ inputs 0
+ translate {0 0 24.95000076}
+ focal 16
+ name Camera3
+ xpos 8082
+ ypos 5718
+}
+Dot {
+ name DotC
+ tile_color 0xff0000ff
+ label DotC
+ xpos 8106
+ ypos 5792
+}
+Camera2 {
+ inputs 0
+ translate {-5.260000229 0 0}
+ rotate {0 -35.43007294 0}
+ name Camera2
+ xpos 7904
+ ypos 5712
+}
+Dot {
+ name DotB
+ tile_color 0xff0000ff
+ label DotB
+ xpos 7928
+ ypos 5786
+}
+push $N43f4590
+Scene {
+ inputs 5
+ name Scene1
+ xpos 8082
+ ypos 5853
+}
+NoOp {
+ inputs 0
+ name Lookups
+ tile_color 0x7fff00ff
+ xpos 7658
+ ypos 6080
+ addUserKnob {20 Lookups}
+ addUserKnob {7 LookupA}
+ LookupA {{curve L 1 0}}
+ addUserKnob {7 LookupB}
+ LookupB {{curve L 0 1 0}}
+ addUserKnob {7 LookupC}
+ LookupC {{curve L x1 0 1 0}}
+ addUserKnob {7 LookupD}
+ LookupD {{curve L x2 0 1 0}}
+ addUserKnob {7 LookupE}
+ LookupE {{curve 0 0 L 0 0 1.000000001}}
+ addUserKnob {20 Aux}
+ addUserKnob {7 norm}
+ norm {{"1/ (LookupA + LookupB + LookupC + LookupD + LookupE)" i}}
+}
+Camera2 {
+ inputs 0
+ translate {{"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.translate * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.translate * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.translate * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.translate * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.translate * Lookups.LookupE(CAM_FADER.Cam)\n)" i} {"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.translate * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.translate * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.translate * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.translate * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.translate * Lookups.LookupE(CAM_FADER.Cam)\n)" i} {"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.translate * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.translate * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.translate * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.translate * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.translate * Lookups.LookupE(CAM_FADER.Cam)\n)" i}}
+ rotate {{"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.rotate * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.rotate * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.rotate * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.rotate * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.rotate * Lookups.LookupE(CAM_FADER.Cam)\n)" i} {"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.rotate * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.rotate * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.rotate * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.rotate * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.rotate * Lookups.LookupE(CAM_FADER.Cam)\n)" i} {"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.rotate * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.rotate * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.rotate * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.rotate * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.rotate * Lookups.LookupE(CAM_FADER.Cam)\n)" i}}
+ focal {{"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.focal * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.focal * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.focal * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.focal * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.focal * Lookups.LookupE(CAM_FADER.Cam)\n)" i}}
+ haperture {{"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.haperture * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.haperture * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.haperture * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.haperture * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.haperture * Lookups.LookupE(CAM_FADER.Cam)\n)\n" i}}
+ vaperture {{"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.vaperture * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.vaperture * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.vaperture * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.vaperture * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.vaperture * Lookups.LookupE(CAM_FADER.Cam)\n)\n" i}}
+ win_translate {{"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.win_translate * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.win_translate * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.win_translate * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.win_translate * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.win_translate * Lookups.LookupE(CAM_FADER.Cam)\n)" i} {"Lookups.norm(CAM_FADER.Cam) *\n\n(\nCam_A.win_translate * Lookups.LookupA(CAM_FADER.Cam)\n+\nCam_B.win_translate * Lookups.LookupB(CAM_FADER.Cam)\n+\nCam_C.win_translate * Lookups.LookupC(CAM_FADER.Cam)\n+\nCam_D.win_translate * Lookups.LookupD(CAM_FADER.Cam)\n+\nCam_E.win_translate * Lookups.LookupE(CAM_FADER.Cam)\n)" i}}
+ name FadeCam1
+ tile_color 0xff00ff
+ xpos 7966
+ ypos 6146
+}
+NoOp {
+ inputs 0
+ name CAM_FADER
+ tile_color 0x7fff00ff
+ xpos 7667
+ ypos 6003
+ addUserKnob {20 User}
+ addUserKnob {7 Cam R 0 4}
+ Cam 2.5
+}
+Read {
+ inputs 0
+ file /Volumes/af/show/oa/shots/202_054/202_054_0010/publish/main/plate/v003/render/plt01/exr/202_054_0010_plt01_v003.shotasfdsaSRC.%05d.exr
+ format "5120 2700 0 0 5120 2700 1 "
+ first 1001
+ last 1170
+ origfirst 1001
+ origlast 1170
+ origset true
+ colorspace shotSRC
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_ENTITY_NAME
+ value2 202_054_0010
+ key3 LOOK
+ key4 AF_SEQUENCE_NAME
+ value4 202_054
+ name Read2
+ xpos 10941
+ ypos 5576
+ addUserKnob {20 "Publish Info"}
+ addUserKnob {1 sg_project l project}
+ sg_project oa
+ addUserKnob {1 sg_entity_type l "entity type"}
+ sg_entity_type Shot
+ addUserKnob {1 sg_entity_code l "entity code"}
+ sg_entity_code 202_054_0010
+ addUserKnob {22 sg_lock_entity l "Lock to Current" T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(True)" +STARTLINE}
+ addUserKnob {22 sg_lock_entity_from_publish l "Lock to Publish" -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(True, publish=True)"}
+ addUserKnob {22 sg_clear_entity l Clear -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).lock_entity(False)"}
+ addUserKnob {26 ""}
+ addUserKnob {1 sg_variation l variation}
+ sg_variation main
+ addUserKnob {1 sg_step.Step.short_name l step}
+ sg_step.Step.short_name plate
+ addUserKnob {1 sg_layer l layer}
+ sg_layer plt01
+ addUserKnob {6 sg_layer_glob l "glob search" t "Match using Unix shell-style wildcards :\n<b>*</b> matches everything\n<b>?</b> matches any single character\n<b>\[<i>seq</i>]</b> matches any character in <i>seq</i>\n<b>\[!<i>seq</i>]</b> matches any character not in <i>seq</i>\n\nAlso supports \"!\", \"&&\" and \"||\" operators.\n" -STARTLINE}
+ addUserKnob {1 sg_sublayer l sublayer}
+ addUserKnob {6 sg_sublayer_glob l "glob search" t "Match using Unix shell-style wildcards :\n<b>*</b> matches everything\n<b>?</b> matches any single character\n<b>\[<i>seq</i>]</b> matches any character in <i>seq</i>\n<b>\[!<i>seq</i>]</b> matches any character not in <i>seq</i>\n\nAlso supports \"!\", \"&&\" and \"||\" operators.\n" -STARTLINE}
+ addUserKnob {1 sg_channel l channel}
+ addUserKnob {1 sg_publish_type l publish_type}
+ sg_publish_type render
+ addUserKnob {1 sg_extension l extension}
+ sg_extension exr
+ addUserKnob {1 sg_path l path +DISABLED}
+ sg_path /Volumes/af/show/oa/shots/202_054/202_054_0010/publish/main/plate/v003/render/plt01/exr/202_054_0010_plt01_v003.shotSRC.%05d.exr
+ addUserKnob {26 ""}
+ addUserKnob {1 sg_force_version l "force version"}
+ addUserKnob {6 sg_greatest_only l "greatest only" +STARTLINE}
+ addUserKnob {6 sg_fullrange_only l "fullrange only" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {22 sg_auto_update l Update -STARTLINE T "from afnuke.dependencies import PublishedNode; PublishedNode(nuke.thisNode()).auto_update()"}
+ addUserKnob {22 sg_browse l Browse -STARTLINE T "from afnuke.build import NukePublishBrowserDialog; NukePublishBrowserDialog.create(node=nuke.thisNode())"}
+}
+Read {
+ inputs 0
+ file /Volumes/af/show/default/shots/color/color_000/publish/main/precomp/v001/render/plt01_/color_000_main_precomp_plt01__v001_%v.%05d.exr
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ first 1001
+ last 1100
+ origfirst 1001
+ origlast 1100
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 color
+ key3 AF_ENTITY_NAME
+ value3 color_000
+ key4 LOOK
+ name Read3
+ xpos 10819
+ ypos 5555
+}
+Switch {
+ inputs 2
+ which {{curve x1039 0 1 0 1 0 x1086 0 x1087 1 0}}
+ name Switch2
+ xpos 10819
+ ypos 5686
+}
+Dot {
+ name Dot18
+ xpos 10853
+ ypos 5775
+}
+Dot {
+ name Dot359
+ xpos 10853
+ ypos 5914
+}
+set N7881ed0 [stack 0]
+Dot {
+ name Dot328
+ xpos 10513
+ ypos 5914
+}
+Text2 {
+ font_size_toolbar 100
+ font_width_toolbar 100
+ font_height_toolbar 100
+ message "\[frame]"
+ old_message {{49 48 54 56}
+   }
+ old_expression_markers {{0 3}
+   }
+ box {0 932 213 1033}
+ transforms {{0 2}
+   }
+ cursor_position 7
+ scale {1 1}
+ center {1093 516.5}
+ cursor_initialised true
+ initial_cursor_position {{0 1033}
+   }
+ group_animations {{0} imported: 0 selected: 0 items: "root transform/"}
+ animation_layers {{1 11 1093 516.5 0 0 1 1 0 0 0 0}
+   }
+ name Text3
+ xpos 10479
+ ypos 6069
+}
+set N788b3d0 [stack 0]
+TimeWarp {
+ lookup {{curve C x1001 1000 1002}}
+ time ""
+ filter nearest
+ name TimeWarp5
+ xpos 10600
+ ypos 6168
+}
+OFlow2 {
+ input.first 1001
+ input.last 1060
+ timing2 Frame
+ timingOutputSpeed 1
+ timingFrame2 {{curve l x1002 1002 1002.5}}
+ name OFlow5
+ xpos 10600
+ ypos 6282
+}
+push $N788b3d0
+TimeWarp {
+ lookup {{curve C x1001 1001 1003}}
+ time ""
+ filter nearest
+ name TimeWarp6
+ xpos 10292
+ ypos 6163
+}
+OFlow2 {
+ input.first 1001
+ input.last 1060
+ timing2 Frame
+ timingOutputSpeed 1
+ timingFrame2 {{curve x1001 1001 l 1001.5}}
+ name OFlow6
+ xpos 10292
+ ypos 6276
+}
+Switch {
+ inputs 2
+ which {{frame%2}}
+ name Switch3
+ xpos 10483
+ ypos 6445
+}
+Dot {
+ name Dot329
+ xpos 10517
+ ypos 6560
+}
+set N89154d0 [stack 0]
+push $N7881ed0
+Dot {
+ name Dot16
+ xpos 10853
+ ypos 6361
+}
+set N891a010 [stack 0]
+Switch {
+ inputs 2
+ which {{curve x1039 0 1 0 1 0}}
+ name Switch4
+ xpos 10819
+ ypos 6630
+ disable true
+}
+Group {
+ inputs 0
+ name SynthesizeFrame
+ label "\[value sframe] : \[value fwidth]"
+ xpos 11367
+ ypos 6295
+ addUserKnob {20 SynthesizeFrame}
+ addUserKnob {3 sframe}
+ sframe 1001
+ addUserKnob {3 fwidth l width -STARTLINE}
+ fwidth 1
+ addUserKnob {22 set_frame l "Set Current" -STARTLINE T "nuke.thisNode()\['sframe'].setValue(nuke.frame())"}
+ addUserKnob {22 set_retime l "Set Up Retime" -STARTLINE T "n = nuke.thisNode()\n\nframe = n\['sframe'].getValue()\nfwidth = n\['fwidth'].getValue()\nn.begin()\nretime_node = nuke.toNode('_RETIME_')\nanimframe = retime_node\['timingFrame2']\nanimframe.clearAnimated()\nanimframe.setAnimated()\nanimframe.setValueAt(frame-1, frame-1)\nanimframe.setValueAt(frame, frame+fwidth)\n"}
+ addUserKnob {6 FrameLabel +STARTLINE}
+ addUserKnob {41 useGPUIfAvailable l "Use GPU if available" T Kronos.useGPUIfAvailable}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -480
+  ypos 62
+ }
+ Text {
+  message "\[frame]"
+  font /Library/Fonts/Arial.ttf
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {0 0 {width-150} {height}}
+  center {1024 576}
+  name Text1
+  xpos -480
+  ypos 134
+  disable {{!parent.FrameLabel}}
+ }
+ Dot {
+  name Dot10
+  note_font_size 42
+  note_font_color 0x7f7f7f01
+  xpos -446
+  ypos 210
+ }
+set Nd6d3500 [stack 0]
+ Dot {
+  name Dot9
+  note_font_size 42
+  note_font_color 0x7f7f7f01
+  xpos -556
+  ypos 210
+ }
+set Ne199e650 [stack 0]
+ TimeOffset {
+  time_offset {{-parent.fwidth i}}
+  time ""
+  name TimeOffset1
+  label "\[value time_offset]"
+  xpos -700
+  ypos 200
+ }
+push $Ne199e650
+ Switch {
+  inputs 2
+  which {{"t >= parent.sframe && t <= parent.sframe+parent.fwidth-1"}}
+  name Switch1
+  xpos -590
+  ypos 278
+ }
+ Kronos {
+  input.first 0
+  input.last 122
+  retimedChannels all
+  timing2 Frame
+  timingFrame2 {{parent._RETIME_.timingFrame2}}
+  showLegacyMode false
+  motionEstimation Regularized
+  legacyModeNuke9 false
+  name Kronos
+  xpos -590
+  ypos 344
+ }
+push $Nd6d3500
+ Switch {
+  inputs 2
+  which {{"t >= parent.sframe && t <= parent.sframe+parent.fwidth-1"}}
+  name Switch2
+  xpos -480
+  ypos 350
+ }
+ Output {
+  name Output1
+  xpos -480
+  ypos 518
+ }
+ NoOp {
+  inputs 0
+  name _RETIME_
+  xpos -700
+  ypos 350
+  addUserKnob {20 User}
+  addUserKnob {7 timingFrame2 l frame R 1001 2000}
+  timingFrame2 {{curve x1000 1000 x1002 1001}}
+ }
+end_group
+push $N89154d0
+push $N891a010
+Dot {
+ name Dot17
+ xpos 11019
+ ypos 6361
+}
+Dot {
+ name Dot15
+ xpos 11019
+ ypos 6539
+}
+Switch {
+ inputs 2
+ which {{Dot15.error}}
+ name Switch1
+ xpos 10985
+ ypos 6601
+}
+push $N8a6b610
+Camera2 {
+ inputs 0
+ translate {-10.03109074 56.56051636 60.15690613}
+ rotate {-4 290 0}
+ focal 27
+ near 1
+ far 100000
+ name Camera8
+ label "\[file tail \[value file]]"
+ xpos 12762
+ ypos 5666
+}
+Dot {
+ name Dot10
+ xpos 12650
+ ypos 5782
+}
+Group {
+ name Horizon
+ xpos 12616
+ ypos 5825
+}
+ Constant {
+  inputs 0
+  channels rgb
+  color {1 0 0 1}
+  name Constant1
+  xpos -744
+  ypos 64
+ }
+ Cylinder {
+  cast_shadow false
+  receive_shadow false
+  rows 1
+  columns 50
+  radius 100
+  height 0.1
+  translate {{parent.Axis2.world_matrix.3} {parent.Axis2.world_matrix.7} {parent.Axis2.world_matrix.11}}
+  name Cylinder1
+  xpos -744
+  ypos 136
+ }
+ Output {
+  name Output1
+  xpos -744
+  ypos 236
+ }
+ Input {
+  inputs 0
+  name Camera
+  xpos -914
+  ypos 65
+ }
+ Axis2 {
+  name Axis2
+  xpos -904
+  ypos 122
+ }
+end_group
+Viewer {
+ inputs 2
+ frame 1021
+ frame_range 1010-1052
+ frame_range_lock true
+ colour_sample_bbox {1.140625 0.05078125 1.141601562 0.0517578125}
+ samplepoints {{1.140625 0.05078125}
+   }
+ name Viewer1
+ xpos 4975
+ ypos 7001
+}
