@@ -20,12 +20,9 @@ def find_dependencies(node_class):
 
     node = select_node(node_class)
     dep_node = nuke.dependencies(node)
-    
-    for node in dep_node:
-        print node.name()
-    
+        
     return dep_node
-
+ 
 
 def get_node_position(node):
     
@@ -61,6 +58,9 @@ def create_deep_holdout_setup(node_class):
     pos3 = get_node_position(deep_holdout)
     pos4 = get_node_position(dot)
 
+    deep_merge = create_node_with_position("DeepMerge",deep_holdout,pos3["x_pos"] + 150,pos3["y_pos"]- 50)
+    deep_holdout.setInput(1,deep_merge)
+
     merge = create_node_with_position("Merge2",deep_holdout,pos3["x_pos"],pos3["y_pos"]+ 100)
     merge.setInput(1,dot)
     merge['operation'].setValue("difference")
@@ -75,24 +75,59 @@ def create_deep_holdout_setup(node_class):
     pos6 = get_node_position(shuffle)
     last_dot = create_node_with_position("Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
 
+    return deep_holdout
+
+
+def check_upstream_match(sourcenode,targetnode):
+   
+    source_node = nuke.toNode(sourcenode)
+    target_node = nuke.toNode(targetnode)
+    dep_nodes = nuke.dependencies(source_node) 
     
+    if target_node in dep_nodes:
+        print "MATCHHHH!"
+        return True
+    else:
+        print "KEEP LOOKING"
+        for node in dep_nodes:
+            return check_upstream_match(node.name(),targetnode)
 
 
 def iterate_deep_holdout_setup():
+
     names = []
+    deep_holdouts = []
+    selected_nodes = []
+    
     for i in nuke.selectedNodes():
         names.append(i.name())
         i['selected'].setValue(False)
+
     for e in names:
         node = nuke.toNode(e)
         class_ = node.Class()
-        print class_
         node['selected'].setValue(True)
-        create_deep_holdout_setup(class_)
-                
+        setup = create_deep_holdout_setup(class_)
+        deep_holdouts.append(setup.name())          
+   
+    counter = 0
 
+    for ho in deep_holdouts:
+        hold_out = nuke.toNode(ho)
+        depp = nuke.dependencies(hold_out)
+        deep_merge = depp[1].name()
+
+        for name in names:     
+           if check_upstream_match(ho,name):
+                print "ALELUYA"
+           elif not check_upstream_match(ho,name):
+                nuke.toNode(deep_merge).setInput(counter,nuke.toNode(name))
+                counter += 1
+            
+       
+     
 iterate_deep_holdout_setup()
 
-#create_deep_holdout_setup("DeepRecolor")
+
 
 
