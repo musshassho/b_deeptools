@@ -1,3 +1,6 @@
+
+
+
 def select_node(node_class):
 
     class_ = node_class
@@ -22,7 +25,7 @@ def find_dependencies(node_class):
     dep_node = nuke.dependencies(node)
         
     return dep_node
- 
+
 
 def get_node_position(node):
     
@@ -71,9 +74,17 @@ def create_deep_holdout_setup(node_class):
     
     pos5 = get_node_position(merge2)
     shuffle = create_node_with_position("Shuffle",merge2,pos5["x_pos"],pos5["y_pos"]+ 100)
+    shuffle['label'].setValue("ALPHA TO RGB")
+    channels = ["red","green","blue","alpha"]
+
+    for channel in channels:
+        shuffle[channel].setValue("alpha")
 
     pos6 = get_node_position(shuffle)
     last_dot = create_node_with_position("Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
+
+    pos7 = get_node_position(last_dot)    
+    AFwrite = create_node_with_position("AFWrite",last_dot,pos7["x_pos"]-15,pos7["y_pos"]+ 100)
 
     return deep_holdout
 
