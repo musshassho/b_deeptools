@@ -1,5 +1,23 @@
 
+#######################################################################################################################
 
+__author__ = "Boris Martinez Castillo"
+__version__ = "1.0.1"
+__maintainer__ = "Boris Martinez Castillo"
+__email__ = "boris.vfx@outlook.com"
+
+#######################################################################################################################
+
+
+import nuke
+import nukescripts
+
+
+
+# DEEP HOLD OUT #######################################################################################################
+
+
+#  DEFINITIONS
 
 def select_node(node_class):
 
@@ -47,10 +65,32 @@ def create_node_with_position(nodename,connect_node,x=0,y=0):
      return node
 
 
+def get_asset_name(sourcenode):
+   
+    source_node = nuke.toNode(sourcenode)
+    target_class = "DeepRead"
+    dep_nodes = nuke.dependencies(source_node) 
+    
+    for node in dep_nodes:
+        class_ = node.Class()
+        if class_ == target_class:
+            try: 
+                asset_name = node["sg_layer"].value()
+                return asset_name
+            except ValueError:
+                print "no asset name found"
+                return None
+        
+        else:
+            return check_upstream_deep(node.name())
+
+
+
 def create_deep_holdout_setup(node_class):
     
     deep_node = nuke.selectedNode()
     dependencies = find_dependencies(node_class)
+    asset_name = get_asset_name(deep_node.name())
 
     pos1 = get_node_position(deep_node)
     pos2 = get_node_position(dependencies[1])
@@ -82,6 +122,7 @@ def create_deep_holdout_setup(node_class):
 
     pos6 = get_node_position(shuffle)
     last_dot = create_node_with_position("Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
+    last_dot['label'].setValue(asset_name + "" + "holdout")
 
     pos7 = get_node_position(last_dot)    
     AFwrite = create_node_with_position("AFWrite",last_dot,pos7["x_pos"]-15,pos7["y_pos"]+ 100)
@@ -137,7 +178,88 @@ def iterate_deep_holdout_setup():
             
        
      
-iterate_deep_holdout_setup()
+#iterate_deep_holdout_setup()
+
+
+
+# SUPER PASS #######################################################################################################
+
+
+
+def create_node_with_position_simple(nodename,x=0,y=0):
+
+     node = nuke.createNode(nodename)
+     node['selected'].setValue(False)
+
+     node.setXpos(x)
+     node.setYpos(y)
+
+
+     return node
+
+
+def get_middle_position():
+
+    x_pos_list = []
+    y_pos_list = []
+
+    for node in nuke.selectedNodes():
+        pos = get_node_position(node)
+        x_pos_list.append(pos["x_pos"])
+        y_pos_list.append(pos["y_pos"])
+    
+    max_x_pos = max(x_pos_list)
+    min_x_pos = min(x_pos_list)
+    
+    avg_y_pos = sum(y_pos_list) / len(y_pos_list)
+
+    diff = max_x_pos - min_x_pos
+    offset = diff / 2
+    
+    return min_x_pos,offset,avg_y_pos
+
+
+def create_rgba_deep_recolor():
+
+	new_deep_recolor_names = []	
+
+    for node in nuke.selectedNodes():
+
+        dependencies = nuke.dependencies(node)
+        deep = dependencies[0]
+        flat = dependencies[1]
+    
+        pos_x = get_node_position(node)["x_pos"]
+        pos_y = get_node_position(node)["y_pos"]
+
+        deep_recolor = create_node_with_position("DeepRecolor", deep, pos_x -150,pos_y  +150 )
+        deep_recolor.setInput(1,flat)
+
+        deep_recolor['channels'].setValue("rgba")
+        
+        new_deep_recolor_names.append(deep_recolor.name())
+
+    return new_deep_recolor_names
+
+
+def main_function():
+    node_list = []
+    for node in nuke.selectedNodes():
+        node_list.append(node)
+
+    create_rgba_deep_recolor()
+    for node in node_list:
+        node['selected'].setValue(True)
+
+    create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1],get_middle_position()[2] + 400)
+   
+
+
+main_function()
+
+
+	
+
 
 
 
