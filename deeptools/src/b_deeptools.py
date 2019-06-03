@@ -19,6 +19,7 @@ import nukescripts
 
 #  DEFINITIONS
 
+
 def select_node(node_class):
 
     class_ = node_class
@@ -52,6 +53,26 @@ def get_node_position(node):
     return pos_dict
 
 
+def get_righthandside_position(node_list):
+
+    x_pos_list = []
+    y_pos_list = []
+
+    for node in node_list:
+        pos = get_node_position(nuke.toNode(node))
+        x_pos_list.append(pos["x_pos"])
+        y_pos_list.append(pos["y_pos"])
+    
+    max_x_pos = max(x_pos_list)
+    min_x_pos = min(x_pos_list)
+
+    avg_y_pos = sum(y_pos_list) / len(y_pos_list)
+   
+    
+    return min_x_pos,max_x_pos,avg_y_pos
+
+
+
 def create_node_with_position(nodename,connect_node,x=0,y=0):
 
      node = nuke.createNode(nodename)
@@ -63,6 +84,60 @@ def create_node_with_position(nodename,connect_node,x=0,y=0):
      node.setInput(0,connect_node)
 
      return node
+
+
+def create_node_with_position_simple(nodename,x=0,y=0):
+
+     node = nuke.createNode(nodename)
+     node['selected'].setValue(False)
+
+     node.setXpos(x)
+     node.setYpos(y)
+
+
+     return node
+
+
+def build_depth_setup(node_list):
+
+    positions = get_righthandside_position(node_list)
+
+    deep_merge = create_node_with_position_simple("DeepMerge",positions[1] +  500, positions[2]+100)
+    deep_merge['selected'].setValue(True)
+
+    deep_to_image = nuke.createNode("DeepToImage")
+    deep_to_image_pos = get_node_position(deep_to_image)
+    deep_to_image.setYpos(deep_to_image_pos["y_pos"] + 50)
+
+    unpremult = nuke.createNode("Unpremult")
+    unpremult['channels'].setValue("Zdepth")
+    deep_to_image_pos = get_node_position(unpremult)
+    unpremult.setYpos(deep_to_image_pos["y_pos"] + 25)
+
+
+    expression = nuke.createNode("Expression")
+    expression['channel3'].setValue("depth")
+    expression['expr3'].setValue("Zdepth.red == 0 ? inf : Zdepth.red")
+    expression_pos = get_node_position(expression)
+    expression.setYpos(expression_pos["y_pos"] + 25)
+
+    
+    remove = nuke.createNode("Remove")
+    remove["operation"].setValue("keep")
+    remove["channels"].setValue("rgba")
+    remove["channels2"].setValue("depth")
+    remove_pos = get_node_position(remove)
+    remove.setYpos(expression_pos["y_pos"] + 25)
+    
+
+    deep_write =  create_node_with_position("AFWrite",remove,get_node_position(remove)["x_pos"],get_node_position(remove)["y_pos"] + 200) 
+
+    counter = 0 
+
+    for node in node_list:
+        deep_merge.setInput(counter,nuke.toNode(node)) 
+        counter += 1
+    return
 
 
 def get_asset_name(sourcenode):
@@ -82,8 +157,7 @@ def get_asset_name(sourcenode):
                 return None
         
         else:
-            return check_upstream_deep(node.name())
-
+            return get_asset_name(node.name())
 
 
 def create_deep_holdout_setup(node_class):
@@ -111,8 +185,8 @@ def create_deep_holdout_setup(node_class):
     merge2 = create_node_with_position("Merge2",dot,pos4["x_pos"]-35,pos4["y_pos"]+ 100)
     merge2.setInput(1,merge)
     merge2['operation'].setValue("divide")
-    
     pos5 = get_node_position(merge2)
+
     shuffle = create_node_with_position("Shuffle",merge2,pos5["x_pos"],pos5["y_pos"]+ 100)
     shuffle['label'].setValue("ALPHA TO RGB")
     channels = ["red","green","blue","alpha"]
@@ -121,10 +195,12 @@ def create_deep_holdout_setup(node_class):
         shuffle[channel].setValue("alpha")
 
     pos6 = get_node_position(shuffle)
-    last_dot = create_node_with_position("Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
-    last_dot['label'].setValue(asset_name + "" + "holdout")
 
-    pos7 = get_node_position(last_dot)    
+    last_dot = create_node_with_position("Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
+    string = str.upper(asset_name + " " + "holdout")
+    last_dot['label'].setValue(string)
+    pos7 = get_node_position(last_dot)
+
     AFwrite = create_node_with_position("AFWrite",last_dot,pos7["x_pos"]-15,pos7["y_pos"]+ 100)
 
     return deep_holdout
@@ -151,9 +227,12 @@ def iterate_deep_holdout_setup():
     deep_holdouts = []
     selected_nodes = []
     
+
     for i in nuke.selectedNodes():
         names.append(i.name())
         i['selected'].setValue(False)
+
+    build_depth_setup(names)
 
     for e in names:
         node = nuke.toNode(e)
@@ -176,26 +255,12 @@ def iterate_deep_holdout_setup():
                 nuke.toNode(deep_merge).setInput(counter,nuke.toNode(name))
                 counter += 1
             
-       
-     
-#iterate_deep_holdout_setup()
-
+    
+  
 
 
 # SUPER PASS #######################################################################################################
 
-
-
-def create_node_with_position_simple(nodename,x=0,y=0):
-
-     node = nuke.createNode(nodename)
-     node['selected'].setValue(False)
-
-     node.setXpos(x)
-     node.setYpos(y)
-
-
-     return node
 
 
 def get_middle_position():
@@ -221,7 +286,7 @@ def get_middle_position():
 
 def create_rgba_deep_recolor():
 
-	new_deep_recolor_names = []	
+    new_deep_recolor_names = []    
 
     for node in nuke.selectedNodes():
 
@@ -242,25 +307,34 @@ def create_rgba_deep_recolor():
     return new_deep_recolor_names
 
 
+
 def main_function():
+
     node_list = []
+
     for node in nuke.selectedNodes():
         node_list.append(node)
 
-    create_rgba_deep_recolor()
+    rgb_deep_recolor = create_rgba_deep_recolor()
+    
     for node in node_list:
         node['selected'].setValue(True)
 
-    create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1],get_middle_position()[2] + 400)
-   
+    deep_merge = create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1],get_middle_position()[2] + 400)
+
+    deep_to_image = create_node_with_position("DeepToImage",deep_merge,get_node_position(deep_merge)["x_pos"],get_node_position(deep_merge)["y_pos"] + 200)
+
+    AFwrite = create_node_with_position("AFWrite",deep_to_image,get_node_position(deep_to_image)["x_pos"],get_node_position(deep_to_image)["y_pos"] + 200)
+    AFwrite['channels'].setValue('all')    
+
+    for name in rgb_deep_recolor:
+       nuke.toNode(name)['selected'].setValue(True)
+
+    deep_deep_merge = create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1] - 800,get_middle_position()[2] + 200)
+
+    deep_write =  create_node_with_position("DeepWrite",deep_deep_merge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
+    
 
 
-main_function()
-
-
-	
-
-
-
-
-
+#main_function()
+iterate_deep_holdout_setup()
