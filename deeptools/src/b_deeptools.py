@@ -113,8 +113,7 @@ def build_depth_setup(node_list):
     unpremult['channels'].setValue("Zdepth")
     deep_to_image_pos = get_node_position(unpremult)
     unpremult.setYpos(deep_to_image_pos["y_pos"] + 25)
-
-
+    
     expression = nuke.createNode("Expression")
     expression['channel3'].setValue("depth")
     expression['expr3'].setValue("Zdepth.red == 0 ? inf : Zdepth.red")
@@ -127,7 +126,7 @@ def build_depth_setup(node_list):
     remove["channels"].setValue("rgba")
     remove["channels2"].setValue("depth")
     remove_pos = get_node_position(remove)
-    remove.setYpos(expression_pos["y_pos"] + 25)
+    remove.setYpos(remove_pos["y_pos"] + 25)
     
 
     deep_write =  create_node_with_position("AFWrite",remove,get_node_position(remove)["x_pos"],get_node_position(remove)["y_pos"] + 200) 
@@ -332,7 +331,8 @@ def main_function():
 
     deep_deep_merge = create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1] - 800,get_middle_position()[2] + 200)
 
-    deep_write =  create_node_with_position("DeepWrite",deep_deep_merge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
+    deep_write =  create_node_with_position("DeepWrite",deep_deep_m    expression = nuke.createNode("Expression")
+erge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
     
 
 
