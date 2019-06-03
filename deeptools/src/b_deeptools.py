@@ -307,7 +307,7 @@ def create_rgba_deep_recolor():
 
 
 
-def main_function():
+def superpass_function():
 
     node_list = []
 
@@ -331,8 +331,7 @@ def main_function():
 
     deep_deep_merge = create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1] - 800,get_middle_position()[2] + 200)
 
-    deep_write =  create_node_with_position("DeepWrite",deep_deep_m    expression = nuke.createNode("Expression")
-erge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
+    deep_write =  create_node_with_position("DeepWrite",deep_deep_merge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
     
 
 
