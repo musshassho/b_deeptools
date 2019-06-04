@@ -334,6 +334,6 @@ def superpass_function():
     deep_write =  create_node_with_position("DeepWrite",deep_deep_merge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
     
 
-
-#main_function()
-iterate_deep_holdout_setup()
+if __name__ ==  "__main__":
+    superpass_function()
+    iterate_deep_holdout_setup()
