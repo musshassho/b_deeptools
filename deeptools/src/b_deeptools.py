@@ -13,6 +13,16 @@ import nuke
 import nukescripts
 
 
+#######################################################################################################################
+
+#TO DO:
+
+# UBER PASS: SUPORT FOR AOV BUNDLE IN ADDITION TO MULTI LAYERED EXR.
+# UBER PASS: SUPORT FOR DEEP_READ IN ADDITION TO DEEP_RECOLOR.
+# ERROR HANDLING: WRONG CLASS SELECTION. 
+# REMOVE AF SPECIFIC DEPENDENCIES BEFORE PUBLISHING.
+# BUILD USER INTERFACE (PYSIDE???)
+
 
 # DEEP HOLD OUT #######################################################################################################
 
@@ -70,7 +80,6 @@ def get_righthandside_position(node_list):
    
     
     return min_x_pos,max_x_pos,avg_y_pos
-
 
 
 def create_node_with_position(nodename,connect_node,x=0,y=0):
@@ -254,12 +263,8 @@ def iterate_deep_holdout_setup():
                 nuke.toNode(deep_merge).setInput(counter,nuke.toNode(name))
                 counter += 1
             
-    
   
-
-
-# SUPER PASS #######################################################################################################
-
+# MEGA PASS #######################################################################################################
 
 
 def get_middle_position():
@@ -306,8 +311,7 @@ def create_rgba_deep_recolor():
     return new_deep_recolor_names
 
 
-
-def superpass_function():
+def uberpass_function():
 
     node_list = []
 
@@ -334,6 +338,43 @@ def superpass_function():
     deep_write =  create_node_with_position("DeepWrite",deep_deep_merge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
     
 
+# DEPTH FOR DEFOCUS #######################################################################################################
+
+
+def depth_for_defocus():
+
+    node_list = []
+
+    for node in nuke.selectedNodes():
+        node_list.append(node)
+
+    #rgb_deep_recolor = create_rgba_deep_recolor()
+    
+    for node in node_list:
+        node['selected'].setValue(True)
+
+    deep_merge = create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1],get_middle_position()[2] + 400)
+
+    deep_to_image = create_node_with_position("DeepToImage",deep_merge,get_node_position(deep_merge)["x_pos"],get_node_position(deep_merge)["y_pos"] + 200)
+
+    unpremult = create_node_with_position("Unpremult",deep_to_image,get_node_position(deep_to_image)["x_pos"],get_node_position(deep_to_image)["y_pos"] + 200)    
+    unpremult['channels'].setValue("Zdepth")
+
+    expression = create_node_with_position("Expression",unpremult,get_node_position(unpremult)["x_pos"],get_node_position(unpremult)["y_pos"] + 200)    
+    expression['channel3'].setValue("depth")
+    expression['expr3'].setValue("Zdepth.red == 0 ? inf : Zdepth.red")
+
+    remove = create_node_with_position("Remove",expression,get_node_position(expression)["x_pos"],get_node_position(expression)["y_pos"] + 200)  
+    remove["operation"].setValue("keep")
+    remove["channels"].setValue("rgba")
+    remove["channels2"].setValue("depth")
+
+    AFwrite = create_node_with_position("AFWrite",deep_to_image,get_node_position(deep_to_image)["x_pos"],get_node_position(deep_to_image)["y_pos"] + 200)
+    AFwrite['channels'].setValue('all')    
+
+
+
 if __name__ ==  "__main__":
-    superpass_function()
-    iterate_deep_holdout_setup()
+    #superpass_function()
+    #iterate_deep_holdout_setup()
+    depth_for_defocus()
