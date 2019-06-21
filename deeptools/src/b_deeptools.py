@@ -11,6 +11,8 @@ __email__ = "boris.vfx@outlook.com"
 
 import nuke
 import nukescripts
+#import dDot
+import itertools
 
 
 #######################################################################################################################
@@ -92,7 +94,8 @@ def create_node_with_position(nodename,connect_node,x=0,y=0):
 
      node.setInput(0,connect_node)
 
-     return node
+     return node 
+
 
 
 def create_node_with_position_simple(nodename,x=0,y=0):
@@ -105,6 +108,21 @@ def create_node_with_position_simple(nodename,x=0,y=0):
 
 
      return node
+
+
+def d_dot_parent(parentname,nodename,connect_node,x=0,y=0):
+
+    parentName = parentname
+    parentKnob = nuke.Text_Knob('parent', 'parent')
+
+    newDot = create_node_with_position(nodename,connect_node,x,y)
+    newDot.knob('label').setValue('[value name]')
+    newDot.knob('name').setValue(parentName)
+    newDot.knob('tile_color').setValue(0)
+    newDot.knob('note_font_size').setValue(33)
+    newDot.addKnob(parentKnob)
+
+    return newDot
 
 
 def build_depth_setup(node_list):
@@ -204,9 +222,10 @@ def create_deep_holdout_setup(node_class):
 
     pos6 = get_node_position(shuffle)
 
-    last_dot = create_node_with_position("Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
-    string = str.upper(asset_name + " " + "holdout")
-    last_dot['label'].setValue(string)
+    #last_dot = create_node_with_position("Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
+    string = str.lower(asset_name + "_" + "holdout")
+    last_dot = d_dot_parent(string,"Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
+    #last_dot['label'].setValue(string)
     pos7 = get_node_position(last_dot)
 
     AFwrite = create_node_with_position("AFWrite",last_dot,pos7["x_pos"]-15,pos7["y_pos"]+ 100)
@@ -240,7 +259,7 @@ def iterate_deep_holdout_setup():
         names.append(i.name())
         i['selected'].setValue(False)
 
-    build_depth_setup(names)
+    #build_depth_setup(names)
 
     for e in names:
         node = nuke.toNode(e)
@@ -264,7 +283,7 @@ def iterate_deep_holdout_setup():
                 counter += 1
             
   
-# MEGA PASS #######################################################################################################
+# UBER PASS #######################################################################################################
 
 
 def get_middle_position():
@@ -288,7 +307,7 @@ def get_middle_position():
     return min_x_pos,offset,avg_y_pos
 
 
-def create_rgba_deep_recolor():
+def create_rgba_deep_recolor(channels):
 
     new_deep_recolor_names = []    
 
@@ -304,7 +323,7 @@ def create_rgba_deep_recolor():
         deep_recolor = create_node_with_position("DeepRecolor", deep, pos_x -150,pos_y  +150 )
         deep_recolor.setInput(1,flat)
 
-        deep_recolor['channels'].setValue("rgba")
+        deep_recolor['channels'].setValue(channels)
         
         new_deep_recolor_names.append(deep_recolor.name())
 
@@ -318,7 +337,7 @@ def uberpass_function():
     for node in nuke.selectedNodes():
         node_list.append(node)
 
-    rgb_deep_recolor = create_rgba_deep_recolor()
+    rgb_deep_recolor = create_rgba_deep_recolor("rgba")
     
     for node in node_list:
         node['selected'].setValue(True)
@@ -348,33 +367,223 @@ def depth_for_defocus():
     for node in nuke.selectedNodes():
         node_list.append(node)
 
-    #rgb_deep_recolor = create_rgba_deep_recolor()
+    rgb_deep_recolor = create_rgba_deep_recolor("all")
     
-    for node in node_list:
-        node['selected'].setValue(True)
+    for name in rgb_deep_recolor:
+        nuke.toNode(name)['selected'].setValue(True)
 
     deep_merge = create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1],get_middle_position()[2] + 400)
 
-    deep_to_image = create_node_with_position("DeepToImage",deep_merge,get_node_position(deep_merge)["x_pos"],get_node_position(deep_merge)["y_pos"] + 200)
+    deep_to_image = create_node_with_position("DeepToImage",deep_merge,get_node_position(deep_merge)["x_pos"],get_node_position(deep_merge)["y_pos"] + 100)
 
-    unpremult = create_node_with_position("Unpremult",deep_to_image,get_node_position(deep_to_image)["x_pos"],get_node_position(deep_to_image)["y_pos"] + 200)    
+    unpremult = create_node_with_position("Unpremult",deep_to_image,get_node_position(deep_to_image)["x_pos"],get_node_position(deep_to_image)["y_pos"] + 100)    
     unpremult['channels'].setValue("Zdepth")
 
-    expression = create_node_with_position("Expression",unpremult,get_node_position(unpremult)["x_pos"],get_node_position(unpremult)["y_pos"] + 200)    
+    expression = create_node_with_position("Expression",unpremult,get_node_position(unpremult)["x_pos"],get_node_position(unpremult)["y_pos"] + 100)    
     expression['channel3'].setValue("depth")
-    expression['expr3'].setValue("Zdepth.red == 0 ? inf : Zdepth.red")
+    expression['expr3'].setValue("Zdepth.red == 0 ? 15000 : Zdepth.red")
 
-    remove = create_node_with_position("Remove",expression,get_node_position(expression)["x_pos"],get_node_position(expression)["y_pos"] + 200)  
+    remove = create_node_with_position("Remove",expression,get_node_position(expression)["x_pos"],get_node_position(expression)["y_pos"] + 100)  
     remove["operation"].setValue("keep")
     remove["channels"].setValue("rgba")
     remove["channels2"].setValue("depth")
 
-    AFwrite = create_node_with_position("AFWrite",deep_to_image,get_node_position(deep_to_image)["x_pos"],get_node_position(deep_to_image)["y_pos"] + 200)
+    pos6 = get_node_position(remove)
+
+    string = "depth_for_defocus"
+
+    last_dot = d_dot_parent(string,"Dot",remove,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
+
+    AFwrite = create_node_with_position("AFWrite",last_dot,get_node_position(last_dot)["x_pos"],get_node_position(last_dot)["y_pos"] + 100)
     AFwrite['channels'].setValue('all')    
 
 
 
+# SPLIT LAYERS #######################################################################################################
+
+
+def splitLayers( node ):
+    
+    '''
+    Splits each and every layer from the selected node into their own pipes
+    '''
+    
+    ch = node.channels()
+    
+    layers = []
+    valid_channels = ['red', 'green', 'blue', 'alpha', 'black', 'white']
+    
+    for each in ch:
+        layer_name = each.split( '.' )[0]
+        tmp = []
+        for channel in ch:
+            if channel.startswith( layer_name ) == True:
+                tmp.append( channel )
+        if len( tmp ) < 4:
+            for i in range( 4 - len( tmp ) ):
+                tmp.append( layer_name + ".white" )
+        if tmp not in layers:
+            layers.append( tmp )
+            
+    for each in layers:
+        layer = each[0].split( '.' )[0]
+        ch1 = each[0].split( '.' )[1]
+        ch2 = each[1].split( '.' )[1]
+        ch3 = each[2].split( '.' )[1]
+        ch4 = each[3].split( '.' )[1]
+        
+        if ch1 not in valid_channels:
+            ch1 = "red red"
+        else:
+            ch1 = '%s %s' % ( ch1, ch1 )
+            
+        if ch2 not in valid_channels:
+            ch2 = "green green"
+        else:
+            ch2 = '%s %s' % ( ch2, ch2 )
+            
+        if ch3 not in valid_channels:
+            ch3 = "blue blue"
+        else:
+            ch3 = '%s %s' % ( ch3, ch3 )
+            
+        if ch4 not in valid_channels:
+            ch4 = "alpha alpha"
+        else:
+            ch4 = '%s %s' % ( ch4, ch4 )
+            
+        prefs = "in %s %s %s %s %s" % (layer, ch1, ch2, ch3, ch4)
+        shuffle = nuke.createNode( 'Shuffle', prefs, inpanel=False )
+        shuffle.knob( 'label' ).setValue( layer )
+        shuffle.setInput( 0, node )
+
+        AFwrite = create_node_with_position("AFWrite",shuffle,get_node_position(shuffle)["x_pos"],get_node_position(shuffle)["y_pos"] + 100)
+        AFwrite['channels'].setValue('all')  
+
+
+# AUTO DDOT COMP  #######################################################################################################
+
+
+def d_dot_connect(nodename,connect_node,x=0,y=0):
+
+    parent_node = nuke.toNode(connect_node)
+    childKnob = nuke.Text_Knob('child', 'child')
+
+    dot = create_node_with_position(nodename,parent_node,x,y)
+    dot.knob('label').setValue(connect_node)
+    dot.knob('tile_color').setValue(0)
+    dot.knob('hide_input').setValue(True)
+    dot.knob('note_font').setValue('italic')
+    dot.knob('note_font_size').setValue(22)
+    dot.addKnob(childKnob)
+
+    return dot
+
+
+def gather_holdout_dot_names():
+    
+    holdout_dots_names = [node['name'].value() for node in nuke.selectedNodes() if node['parent']]
+    
+    return holdout_dots_names
+
+
+def find_holdout_source_elements(houldout_names):
+    
+    houldout_processed_list = [] 
+        
+    for name in houldout_names:
+        _ = "_".join(name.split('_')[:-1])
+        if nuke.toNode(_):
+            houldout_processed_list.append(_)
+        else:
+            print "no corresponding element found for {}".format(name)
+    
+    return houldout_processed_list
+
+
+def create_and_connect_child_dots(holdouts,color):
+    
+    multiply_list = []
+    
+    counter = 0
+    adder = 0
+    adder_x = 0
+    pos_f_x = None
+    pos_f_y = None
+
+
+    for f,b in itertools.izip(holdouts,color):
+
+        if counter == 0 :
+
+            pos_f_x = get_node_position(nuke.toNode(f))["x_pos"]
+            pos_f_y = get_node_position(nuke.toNode(f))["y_pos"]
+      
+            child_holdout_dot = d_dot_connect("Dot",f,pos_f_x,pos_f_y + 1000)
+            child_color_dot = d_dot_connect("Dot",b,pos_f_x - 200,pos_f_y + 1200)        
+            
+            multiply = create_node_with_position("Multiply",child_color_dot,pos_f_x - 35 ,pos_f_y + 1190)
+            multiply.setInput(0,child_color_dot)
+            multiply.setInput(1,child_holdout_dot)
+            multiply['label'].setValue("DEEP HOLDOUT MULT BY ZERO")
+            multiply['value'].setValue(0)
+    
+            multiply_list.append(multiply)
+            counter += 1
+
+        else:
+
+            adder += 1000
+            adder_x += - 1000  
+            child_holdout_dot = d_dot_connect("Dot",f,pos_f_x  + adder_x ,pos_f_y + 1000 + adder)
+            child_color_dot = d_dot_connect("Dot",b,pos_f_x - 200  + adder_x ,pos_f_y + 1200 + adder)        
+                        
+            multiply = create_node_with_position("Multiply",child_color_dot,pos_f_x - 35  + adder_x ,pos_f_y + 1190 + adder )
+            adder_x = 0 
+                
+            multiply.setInput(0,child_color_dot)
+            multiply.setInput(1,child_holdout_dot)
+            multiply['label'].setValue("DEEP HOLDOUT MULT BY ZERO")
+            multiply['value'].setValue(0)
+
+
+            multiply_list.append(multiply)
+          
+    counter  = 0
+    holder = []
+    
+    for i in range(len(multiply_list)):
+
+        if counter == 0:
+
+            x = get_node_position(multiply_list[i])["x_pos"]
+            y = get_node_position(multiply_list[i])["y_pos"]
+
+            counter += 1
+        
+        else:
+            
+            x = get_node_position(multiply_list[i])["x_pos"]
+            y = get_node_position(multiply_list[i])["y_pos"]
+      
+            merge = create_node_with_position_simple("Merge2",pos_f_x,y)
+            merge['operation'].setValue('disjoint-over')
+            holder.append(merge)
+
+            if len(holder) == 1:
+                merge.setInput(0,multiply_list[i-1])
+                merge.setInput(1,multiply_list[i])
+                
+            elif len(holder) > 1:
+                print holder[i-2].name() 
+                merge.setInput(0,holder[i-2])
+                merge.setInput(1,multiply_list[i])
+                
+                             
+
+
 if __name__ ==  "__main__":
-    #superpass_function()
-    #iterate_deep_holdout_setup()
+    #uberpass_function()
+    #terate_deep_holdout_setup()
     depth_for_defocus()
+    create_and_connect_child_dots(gather_holdout_dot_names(),find_holdout_source_elements(gather_holdout_dot_names()))    
