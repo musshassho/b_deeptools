@@ -24,14 +24,16 @@ import itertools
 # ERROR HANDLING: WRONG CLASS SELECTION. 
 # REMOVE AF SPECIFIC DEPENDENCIES BEFORE PUBLISHING.
 # BUILD USER INTERFACE (PYSIDE???)
-# FIX DOUBLE NAMING ISSUE. (((DONE)))
+# FIX DOUBLE NAMING ISSUE
 # FIX WRONG SELECTION ERROR
-# IMPLEMENT SWITCH FIR EASY PRECOMP
-# FIX WHITE SPACES IN WRONGLY NAMED DOTS.
-
+# IMPLEMENT SWITCH FOR EASY PRECOMP
+# FIX AUTOCOMP FROM WRITE
 
 # DEEP HOLD OUT #######################################################################################################
 
+# GLOBALS
+
+DOT_COUNT = 0
 
 #  DEFINITIONS
 
@@ -227,17 +229,20 @@ def create_deep_holdout_setup(node_class):
 
     pos6 = get_node_position(shuffle)
 
-    string = str.lower(asset_name + "_" + "holdout")
-    name_number = 1   
+    string = str.lower(asset_name + "_" + "holdout") + "_" + str(DOT_COUNT)
 
-    if not nuke.toNode(string):
-        last_dot = d_dot_parent(string,"Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
-    else:
-        last_dot = d_dot_parent(string + "_" +str(name_number),"Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
-        name_number += 1
+    
+    if nuke.toNode(string):
 
+        global DOT_COUNT
+        local_DOT_COUNT = DOT_COUNT
+        local_DOT_COUNT += 1 
+        string = str.lower(asset_name + "_" + "holdout") + "_" + str(local_DOT_COUNT)
+    
+
+    last_dot = d_dot_parent(string,"Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
+    
     pos7 = get_node_position(last_dot)
-        
 
     AFwrite = create_node_with_position("AFWrite",last_dot,pos7["x_pos"]-15,pos7["y_pos"]+ 100)
 
@@ -267,36 +272,38 @@ def iterate_deep_holdout_setup():
     
 
     for i in nuke.selectedNodes():
-        if i.Class != "DeepRecolor":
-            nuke.message(Please, select only DeepRecolor Nodes)
-            return None
-        else:
+        if i.Class() != "DeepRecolor":
+            names = []
+            nuke.message("Please, select only DeepRecolor Nodes")    
+            return
+
+        else:    
             names.append(i.name())
             i['selected'].setValue(False)
 
-        #build_depth_setup(names)
+    #build_depth_setup(names)
 
-        for e in names:
-            node = nuke.toNode(e)
-            class_ = node.Class()
-            node['selected'].setValue(True)
-            setup = create_deep_holdout_setup(class_)
-            deep_holdouts.append(setup.name())          
-       
-        counter = 0
+    for e in names:
+        node = nuke.toNode(e)
+        class_ = node.Class()
+        node['selected'].setValue(True)
+        setup = create_deep_holdout_setup(class_)
+        deep_holdouts.append(setup.name())          
+   
+    counter = 0
 
-        for ho in deep_holdouts:
-            hold_out = nuke.toNode(ho)
-            depp = nuke.dependencies(hold_out)
-            deep_merge = depp[1].name()
+    for ho in deep_holdouts:
+        hold_out = nuke.toNode(ho)
+        depp = nuke.dependencies(hold_out)
+        deep_merge = depp[1].name()
 
-            for name in names:     
-               if check_upstream_match(ho,name):
-                    print "ALELUYA"
-               elif not check_upstream_match(ho,name):
-                    nuke.toNode(deep_merge).setInput(counter,nuke.toNode(name))
-                    counter += 1
-                
+        for name in names:     
+           if check_upstream_match(ho,name):
+                print "ALELUYA"
+           elif not check_upstream_match(ho,name):
+                nuke.toNode(deep_merge).setInput(counter,nuke.toNode(name))
+                counter += 1
+            
   
 # UBER PASS #######################################################################################################
 
@@ -405,7 +412,7 @@ def depth_for_defocus():
 
     pos6 = get_node_position(remove)
 
-    string = "depth_for_defocus"
+    string = "depth_from_deep"
 
     last_dot = d_dot_parent(string,"Dot",remove,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
 
@@ -507,7 +514,7 @@ def find_holdout_source_elements(houldout_names):
     houldout_processed_list = [] 
         
     for name in houldout_names:
-        _ = "_".join(name.split('_')[:-1])
+        _ = "_".join(name.split('_')[:-2])
         if nuke.toNode(_):
             houldout_processed_list.append(_)
         else:
@@ -599,6 +606,6 @@ def create_and_connect_child_dots(holdouts,color):
 
 if __name__ ==  "__main__":
     #uberpass_function()
-    #terate_deep_holdout_setup()
+    iterate_deep_holdout_setup()
     #depth_for_defocus()
     #create_and_connect_child_dots(gather_holdout_dot_names(),find_holdout_source_elements(gather_holdout_dot_names()))    
