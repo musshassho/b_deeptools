@@ -268,7 +268,7 @@ def iterate_deep_holdout_setup():
 
     for i in nuke.selectedNodes():
         if i.Class != "DeepRecolor":
-            nuke.message(Please, select only DeepRecolor Nodes)
+            nuke.message("Please, select only DeepRecolor Nodes")
             return None
         else:
             names.append(i.name())

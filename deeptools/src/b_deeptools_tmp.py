@@ -19,21 +19,22 @@ import itertools
 
 #TO DO:
 
-# UBER PASS: SUPORT FOR AOV BUNDLE IN ADDITION TO MULTI LAYERED EXR.
-# UBER PASS: SUPORT FOR DEEP_READ IN ADDITION TO DEEP_RECOLOR.
-# ERROR HANDLING: WRONG CLASS SELECTION. 
+# UBER PASS: SUPPORT FOR AOV BUNDLE IN ADDITION TO MULTI LAYERED EXR.
+# SUPPORT FOR DEEP_READ IN ADDITION TO DEEP_RECOLOR.
+# ERROR HANDLING: WRONG CLASS SELECTION.DONE
 # REMOVE AF SPECIFIC DEPENDENCIES BEFORE PUBLISHING.
 # BUILD USER INTERFACE (PYSIDE???)
-# FIX DOUBLE NAMING ISSUE
-# FIX WRONG SELECTION ERROR
-# IMPLEMENT SWITCH FOR EASY PRECOMP
-# FIX AUTOCOMP FROM WRITE
+# FIX DOUBLE NAMING ISSUE.
+# FIX WRONG SELECTION ERROR.DONE
+# IMPLEMENT SWITCH FOR EASY PRECOMP.
+# FIX AUTOCOMP FROM WRITE.
+# FIX WHITE SPACES FROM DEFAULT LGT ELEMENT NAME.
+# CHECK OUT WHAT HAPPENS IF THERE'S NO DOT FOR THE COLOR INPUT OF THE DEEP RECOLOR NODE.
 
 # DEEP HOLD OUT #######################################################################################################
 
 # GLOBALS
 
-DOT_COUNT = 0
 
 #  DEFINITIONS
 
@@ -193,7 +194,9 @@ def get_asset_name(sourcenode):
 
 
 def create_deep_holdout_setup(node_class):
-    
+
+    DOT_COUNT = 0
+
     deep_node = nuke.selectedNode()
     dependencies = find_dependencies(node_class)
     asset_name = get_asset_name(deep_node.name())
@@ -234,17 +237,15 @@ def create_deep_holdout_setup(node_class):
     
     if nuke.toNode(string):
 
-        global DOT_COUNT
-        local_DOT_COUNT = DOT_COUNT
-        local_DOT_COUNT += 1 
-        string = str.lower(asset_name + "_" + "holdout") + "_" + str(local_DOT_COUNT)
+        DOT_COUNT += 1
+        string = str.lower(asset_name + "_" + "holdout") + "_" + str(DOT_COUNT)
     
 
     last_dot = d_dot_parent(string,"Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
-    
+
     pos7 = get_node_position(last_dot)
 
-    AFwrite = create_node_with_position("AFWrite",last_dot,pos7["x_pos"]-15,pos7["y_pos"]+ 100)
+    #AFwrite = create_node_with_position("AFWrite",last_dot,pos7["x_pos"]-15,pos7["y_pos"]+ 100)
 
     return deep_holdout
 
@@ -269,14 +270,13 @@ def iterate_deep_holdout_setup():
     names = []
     deep_holdouts = []
     selected_nodes = []
-    
+
 
     for i in nuke.selectedNodes():
+
         if i.Class() != "DeepRecolor":
-            names = []
             nuke.message("Please, select only DeepRecolor Nodes")    
             return
-
         else:    
             names.append(i.name())
             i['selected'].setValue(False)
@@ -526,7 +526,6 @@ def find_holdout_source_elements(houldout_names):
 def create_and_connect_child_dots(holdouts,color):
     
     multiply_list = []
-    
     counter = 0
     adder = 0
     adder_x = 0
