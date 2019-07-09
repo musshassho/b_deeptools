@@ -11,7 +11,6 @@ __email__ = "boris.vfx@outlook.com"
 
 import nuke
 import nukescripts
-#import dDot
 import itertools
 
 
@@ -30,11 +29,13 @@ import itertools
 # FIX AUTOCOMP FROM WRITE.
 # FIX WHITE SPACES FROM DEFAULT LGT ELEMENT NAME.
 # CHECK OUT WHAT HAPPENS IF THERE'S NO DOT FOR THE COLOR INPUT OF THE DEEP RECOLOR NODE.
+# CHECK OUT PYLINT
 
 # DEEP HOLD OUT #######################################################################################################
 
 # GLOBALS
 
+DOT_COUNT = 0
 
 #  DEFINITIONS
 
@@ -96,8 +97,8 @@ def create_node_with_position(nodename,connect_node,x=0,y=0):
      node = nuke.createNode(nodename)
      node['selected'].setValue(False)
 
-     node.setXpos(x)
-     node.setYpos(y)
+     node.setXpos(int(x))
+     node.setYpos(int(y))
 
      node.setInput(0,connect_node)
 
@@ -110,8 +111,8 @@ def create_node_with_position_simple(nodename,x=0,y=0):
      node = nuke.createNode(nodename)
      node['selected'].setValue(False)
 
-     node.setXpos(x)
-     node.setYpos(y)
+     node.setXpos(int(x))
+     node.setYpos(int(y))
 
 
      return node
@@ -180,23 +181,23 @@ def get_asset_name(sourcenode):
     dep_nodes = nuke.dependencies(source_node) 
     
     for node in dep_nodes:
-        class_ = node.Class()
-        if class_ == target_class:
+        if node.Class() == target_class:
             try: 
                 asset_name = node["sg_layer"].value()
                 return asset_name
             except ValueError:
                 print "no asset name found"
+
                 return None
-        
         else:
             return get_asset_name(node.name())
 
 
 def create_deep_holdout_setup(node_class):
 
-    DOT_COUNT = 0
+    global DOT_COUNT
 
+    
     deep_node = nuke.selectedNode()
     dependencies = find_dependencies(node_class)
     asset_name = get_asset_name(deep_node.name())
@@ -240,12 +241,21 @@ def create_deep_holdout_setup(node_class):
         DOT_COUNT += 1
         string = str.lower(asset_name + "_" + "holdout") + "_" + str(DOT_COUNT)
     
+    switch = create_node_with_position("Switch",shuffle,pos6["x_pos"],pos6["y_pos"]+ 200)
 
-    last_dot = d_dot_parent(string,"Dot",shuffle,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
+    pos7 = get_node_position(switch)
 
-    pos7 = get_node_position(last_dot)
+    switch_dot = create_node_with_position_simple("Dot",pos7["x_pos"]-150,pos7["y_pos"])
+    
+    switch.setInput(1,switch_dot)
+    switch['label'].setValue("[value which]")
 
-    #AFwrite = create_node_with_position("AFWrite",last_dot,pos7["x_pos"]-15,pos7["y_pos"]+ 100)
+
+    last_dot = d_dot_parent(string,"Dot",switch,pos7["x_pos"]+35,pos7["y_pos"]+ 500)
+
+    pos8 = get_node_position(last_dot)
+
+    #AFwrite = create_node_with_position("AFWrite",last_dot,pos8["x_pos"]-15,pos8["y_pos"]+ 100)
 
     return deep_holdout
 
@@ -342,8 +352,10 @@ def create_rgba_deep_recolor(channels):
         pos_x = get_node_position(node)["x_pos"]
         pos_y = get_node_position(node)["y_pos"]
 
-        deep_recolor = create_node_with_position("DeepRecolor", deep, pos_x -150,pos_y  +150 )
-        deep_recolor.setInput(1,flat)
+        deep_recolor = create_node_with_position("DeepRecolor", deep, pos_x -150,pos_y  +450 )
+        deep_recolor.setInput(1,flat) 
+        deep_recolor['tile_color'].setValue(4278239231)
+    
 
         deep_recolor['channels'].setValue(channels)
         
@@ -368,13 +380,23 @@ def uberpass_function():
 
     deep_to_image = create_node_with_position("DeepToImage",deep_merge,get_node_position(deep_merge)["x_pos"],get_node_position(deep_merge)["y_pos"] + 200)
 
-    AFwrite = create_node_with_position("AFWrite",deep_to_image,get_node_position(deep_to_image)["x_pos"],get_node_position(deep_to_image)["y_pos"] + 200)
+    deep_to_image_pos = get_node_position(deep_to_image)
+    
+    string = "uberpass_color_output"
+    last_dot = d_dot_parent(string,"Dot",deep_to_image,deep_to_image_pos["x_pos"]+35,deep_to_image_pos["y_pos"]+ 100)
+
+    AFwrite = create_node_with_position("Write",last_dot,get_node_position(last_dot)["x_pos"],get_node_position(last_dot)["y_pos"] + 200)
     AFwrite['channels'].setValue('all')    
 
     for name in rgb_deep_recolor:
        nuke.toNode(name)['selected'].setValue(True)
 
     deep_deep_merge = create_node_with_position_simple("DeepMerge",get_middle_position()[0] + get_middle_position()[1] - 800,get_middle_position()[2] + 200)
+
+    deep_deep_merge_pos = get_node_position(deep_deep_merge)
+
+    string_deep = "uberpass_deep_output"
+    last_dot_deep = d_dot_parent(string_deep,"Dot",deep_deep_merge,deep_deep_merge_pos["x_pos"]+35,deep_deep_merge_pos["y_pos"]+ 100)
 
     deep_write =  create_node_with_position("DeepWrite",deep_deep_merge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
     
@@ -416,7 +438,7 @@ def depth_for_defocus():
 
     last_dot = d_dot_parent(string,"Dot",remove,pos6["x_pos"]+35,pos6["y_pos"]+ 100)
 
-    AFwrite = create_node_with_position("AFWrite",last_dot,get_node_position(last_dot)["x_pos"],get_node_position(last_dot)["y_pos"] + 100)
+    AFwrite = create_node_with_position("Write",last_dot,get_node_position(last_dot)["x_pos"],get_node_position(last_dot)["y_pos"] + 100)
     AFwrite['channels'].setValue('all')    
 
 

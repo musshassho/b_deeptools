@@ -1,0 +1,93 @@
+
+
+
+Working with Deep is super cool, but can also be very, very slow. Luckily, there's strategies we can put forth to leverage the power of 
+Deep Comping without compromising our script responsiveness and our own productivity. Here's how:
+
+
+
+DEEP HOLDOUTS
+
+One of the coolest things about Deep is that it allows for volumetric out-holding between our CG elements, as we all know. The problem is that
+the amount of data needed to achieve this is oftentimes massive, rendering our scripts very sluggish. 
+
+The solution is to create and precomp a set of mattes to holdout the CG elements with each other in 2d, 
+thus allowing for regular 2d merge as though they were combined in Deep.
+
+Instructions:
+
+insert pic 1 here (all cg elements)
+
+1 - Make sure each CG element and its Deep Data is connected to the corresponding inputs of a DeepRecolor node. 
+2 - Make sure the CG element is on the left hand side, and the DeepRead on the right. Also, it's gonna look better with a dot creating a right angle between the color DeepRecolor and the CG element. Like this:
+
+insert pic 2 here (cg element detail)
+
+3 - To make it dDot compatible (and enable for the revolutionary autocomp feature), please drop a Ddot node here and here (show in the pic) named 
+according to this convention:
+
+	3.1 - For the color input, please just copy the name from a Read's node publish Info / layer knob. Please avoid empty spaces. I.e: "bty_forest_mg"
+	3.1 - For the depth input, just add a "_deep" trailing to the former name.I.e: "bty_forest_mg_deep"
+	
+	**Please note that if you don't drop dDots there, it'll still work fine, just without the extended functionality that dDot provides (and you'll not be able to use the crazy autocomp feature).
+
+4 - Voila, click on the "create_holdouts" tool and, if everything goes fine, this is what you'll get:
+
+insert pic 3 here (holdouts overview)
+
+	A full set of houldouts to stencil your CG elemets with each other :)
+
+5 - Now drop here (show in the pic 4) a AFWrite node for each element, prerender your holdouts, conect them to the switch node 1 input and switch to 1, and we are done here.
+	Btw, if I were you, I'd use this convention for the holdout precomp output:  <elementname_holdout>. I.e: "bty_forest_mg_holdout"
+
+
+
+AUTOCOMP
+
+Having carefully complied with above's procedure, and provided you chose to drop the dDots where suggested, now your are going to be able to autocomp all your CG elements together in literally less than a second. Cool, right? 
+
+
+Instructions:
+
+1 - As you have probably noticed, at the end of each holdout setup there's a dot node automatically named according to the <elementname_holdout_version> rule. For instance: "bty_char_dalton_010_holdout_0". 
+
+- insert pic 5 here (holdout ddots)
+
+2 - Select all these dots and just click on "Autocomp".
+
+- insert  pic 6 here (autocomp)
+
+3 - Voila, a working autocomp of all your elements held out witch each other and disjoint-over merged together. 
+
+
+4 - If you reveal hidden connections (alt+a), you'll see that each dot in your autocomp is connecting to each CG element and its corresponding holdout, which is used as a mask for a "Multiply" node. 
+
+- insert pic 7, 8 here 
+- insert pic 9
+
+Happy comping!
+
+
+
+DEEP_UBERPASS
+
+Sometimes, you will get a bunch of different CG elements with deep data that you would rather want to have combined in one big ass pass. 
+What the uberpass tool does is precisely combining all your CG elements and its AOVS, on the one hand, and all the deep data, on the other.
+This way you will still have all the coolness of working with deep but with a reduced amount of complexity and overhead.
+
+
+Instructions:
+
+1 - Select all your deepRecolor nodes and click on the "uberpass" button.
+
+- insert pic 10 here (uberpass)
+
+2 - As you see, there are two deepMerge setups: one for rendering out all the combined color together with all the Aovs. The other to DeepWrite out the combined deep data.
+
+
+
+
+depth_from_deep
+
+
+autocomp

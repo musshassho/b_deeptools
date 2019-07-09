@@ -1,0 +1,2184 @@
+#! /opt/thefoundry/nuke/Nuke11.2v5/libnuke-11.2.5.so -nx
+version 11.2 v5
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="1" y="29" w="2560" h="1341" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="2516" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1297"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="2560" y="122" w="1920" h="1163" screen="1">
+        <splitter orientation="1">
+            <split size="1234"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DopeSheet.1"/>
+                <page id="Curve Editor.1"/>
+                <page id="DAG.1"/>
+            </dock>
+            <split size="682"/>
+            <splitter orientation="2">
+                <split size="580"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="579"/>
+                <dock id="" activePageId="uk.co.thefoundry.scripteditor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/deeptools_snapshots_v001.nk
+ frame 1016
+ first_frame 1016
+ last_frame 1093
+ lock_range true
+ fps 25
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement OCIO
+ OCIO_config custom
+ customOCIOConfigPath /Volumes/af/show/bld/assets/lut/ocio_config/publish/main/lut/v012/bundle/config.ocio
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT "ACES - ACEScg"
+ monitorLut "Internal Grade"
+ int8Lut "ACES - ACEScg"
+ int16Lut "ACES - ACEScg"
+ logLut "ACES - ACEScct"
+ floatLut "ACES - ACEScg"
+ free_type_font_path /Volumes/af/tools/common/nuke/slate/font/
+ free_type_system_fonts false
+ addUserKnob {20 mariTab l Mari}
+ addUserKnob {26 cmdStatus l "listen status" t "The status of Nuke's command port" T <b>Disabled</b>}
+ addUserKnob {26 sendStatus l "send status" t "The status of Nuke's connection to Mari" T <b>Inactive</b>}
+ addUserKnob {3 socketPort l "nuke command port" t "Port to listen on. Make sure this matches the command port set in Mari's \"Nuke\" Palette."}
+ socketPort 50107
+ addUserKnob {6 enableSocket l enabled -STARTLINE}
+ addUserKnob {26 divider l "" +STARTLINE}
+ addUserKnob {20 advanced n 1}
+ advanced 0
+ addUserKnob {3 portRange l "port range" t "If the main specified command port is unavailable, Nuke will try using the next port number, and continue until successful or the indicated number of ports have been tried."}
+ portRange 200
+ addUserKnob {4 enablePortRange l "" t "Indicates whether to use a range of ports up to the given number, or to use only the single one specified." -STARTLINE M {"use range" "single port only"}}
+ addUserKnob {6 localhostOnly l "local host only" t "This determines whether the Mari bridge server will listen for connections from any machine, or from \"localhost\" (the local machine) only.<p>Only allowing connections from localhost is more secure, but will prevent you from using the Nuke&lt;&gt;Mari workflow across the network." +STARTLINE}
+ addUserKnob {1 hostName l "mari host" t "The machine name or IP address that Mari is running on.\nLeave empty if both Mari and Nuke are running on the same machine."}
+ hostName localhost
+ addUserKnob {3 socketPortSend l port t "Port that Mari is listening to. Make sure this matches the command port set in Mari's preferences." -STARTLINE}
+ socketPortSend 6100
+ addUserKnob {2 mariDataDir l "mari data dir" t "Path to directory that will hold transient data to be sent to Mari (exrs, objs and fbx files). If this is left empty, a \"mari\" directory will be created in the nk file's location"}
+ mariDataDir "\[getenv NUKE_TEMP_DIR]/mariData"
+ addUserKnob {2 mariLocation l "mari launch path" t "The path to launch Mari from.<br>This can also be set using the <b>MARI_INSTALL_PATH</b> environment variable."}
+ mariLocation /opt/thefoundry/mari/mari3.3v1EXT4/mari
+ addUserKnob {20 endGroup n -1}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/hold_outs_detail.png
+ format "974 1064 0 0 974 1064 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read1
+ xpos -480
+ ypos -1110
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay1
+ xpos -480
+ ypos -921
+}
+Transform {
+ translate {-228.5 -278.5}
+ scale 0.5
+ center {487 532}
+ filter Lanczos4
+ shutteroffset centred
+ name Transform1
+ xpos -480
+ ypos -897
+}
+Dot {
+ name Dot1
+ xpos -446
+ ypos -700
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant1
+ xpos -637
+ ypos -1111
+}
+Reformat {
+ type "to box"
+ box_width 512
+ box_height 512
+ box_fixed true
+ scale 0.5
+ name Reformat1
+ xpos -637
+ ypos -882
+}
+Merge2 {
+ inputs 2
+ name Merge1
+ label "BBox: \[value knob.bbox]"
+ xpos -637
+ ypos -709
+}
+Crop {
+ box {0 0 512 512}
+ crop false
+ name Crop1
+ xpos -637
+ ypos -570
+}
+Dot {
+ name Dot2
+ xpos -603
+ ypos -460
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/lgt_element.png
+ format "566 576 0 0 566 576 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read5
+ xpos -1580
+ ypos 109
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay4
+ xpos -1580
+ ypos 298
+}
+Transform {
+ translate {-54 -24}
+ scale 0.9
+ center {336 209}
+ filter Lanczos4
+ shutteroffset centred
+ name Transform4
+ xpos -1580
+ ypos 322
+}
+Dot {
+ name Dot7
+ xpos -1546
+ ypos 525
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant4
+ xpos -1737
+ ypos 108
+}
+Reformat {
+ type "to box"
+ box_width 512
+ box_height 512
+ box_fixed true
+ scale 0.5
+ name Reformat4
+ xpos -1737
+ ypos 337
+}
+Merge2 {
+ inputs 2
+ name Merge4
+ label "BBox: \[value knob.bbox]"
+ xpos -1737
+ ypos 516
+}
+Crop {
+ box {0 0 512 512}
+ crop false
+ name Crop4
+ xpos -1737
+ ypos 687
+}
+Group {
+ name G_Sharpen3
+ tile_color 0xff9595ff
+ xpos -1737
+ ypos 735
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N28ce19a0 [stack 0]
+push $N28ce19a0
+ Blur {
+  channels rgba
+  size {{G_Sharpen3.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N28ce19a0
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N28d15ce0 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N28d15ce0
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_2
+ label "\[value name]"
+ note_font_size 33
+ xpos -1703
+ ypos 1071
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/all_lgt_elements.png
+ format "1366 429 0 0 1366 429 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read3
+ xpos -1889
+ ypos 113
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay3
+ xpos -1889
+ ypos 295
+}
+Transform {
+ translate {-96 21}
+ scale 0.8
+ center {530 226.5}
+ shutteroffset centred
+ name Transform3
+ xpos -1889
+ ypos 319
+}
+Dot {
+ name Dot5
+ xpos -1855
+ ypos 538
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant3
+ xpos -2046
+ ypos 114
+}
+Reformat {
+ type "to box"
+ box_width 1024
+ box_height 515
+ box_fixed true
+ name Reformat2
+ xpos -2046
+ ypos 333
+}
+Merge2 {
+ inputs 2
+ name Merge3
+ label "BBox: \[value knob.bbox]"
+ xpos -2046
+ ypos 529
+}
+Crop {
+ box {0 0 1024 515}
+ crop false
+ name Crop3
+ xpos -2046
+ ypos 687
+}
+Group {
+ name G_Sharpen4
+ tile_color 0xff9595ff
+ xpos -2046
+ ypos 735
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N2cbd72d0 [stack 0]
+push $N2cbd72d0
+ Blur {
+  channels rgba
+  size {{G_Sharpen4.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N2cbd72d0
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N28bb33e0 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N28bb33e0
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_1
+ label "\[value name]"
+ note_font_size 33
+ xpos -2012
+ ypos 1071
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/deep_toolset_properties_bin.png
+ format "606 324 0 0 606 324 1 "
+ origset true
+ version 3
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read4
+ xpos -1093
+ ypos -1101
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay5
+ xpos -1093
+ ypos -912
+}
+Transform {
+ translate {-31 42}
+ scale 0.9
+ center {336 209}
+ filter Lanczos4
+ shutteroffset centred
+ name Transform5
+ xpos -1093
+ ypos -888
+}
+Transform {
+ scale 1.02
+ center {256 256}
+ shutteroffset centred
+ name Transform6
+ xpos -1093
+ ypos -835
+}
+Dot {
+ name Dot9
+ xpos -1059
+ ypos -691
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant5
+ xpos -1250
+ ypos -1089
+}
+Reformat {
+ type "to box"
+ box_width 512
+ box_height 512
+ box_fixed true
+ scale 0.5
+ name Reformat5
+ xpos -1250
+ ypos -873
+}
+Merge2 {
+ inputs 2
+ name Merge5
+ label "BBox: \[value knob.bbox]"
+ xpos -1250
+ ypos -700
+}
+Crop {
+ box {0 0 512 512}
+ crop false
+ name Crop5
+ xpos -1250
+ ypos -561
+}
+Roto {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x43800000 x43800000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Rectangle1 512 bezier
+     {{cc
+       {f 8192}
+       {px x447e0000
+        {0 xc0eaaab0}
+        {xc1400000 x42980000}
+        {x43318000 0}
+        {xc3318000 0}
+        {x44022000 x42980000}
+        {0 xc0eaaab0}
+        {0 x40eaaaa8}
+        {x44022000 x42580000}
+        {xc3318000 0}
+        {x43318000 0}
+        {xc1400000 x42580000}
+        {0 x40eaaaa8}}}     idem}
+     {tx x447e0000 x437e4000 x42820000}
+     {a osw x41200000 osf 0 src 1 str 1 spx x43800000 spy x43800000 sb 1 ltn x447e0000 ltm x447e0000 tt x41000000 sty xc1a00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 tt 8 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {256 256}
+ colorOverlay {0 0 0 0}
+ paint_source foreground
+ lifetime_type "all frames"
+ lifetime_start 1016
+ lifetime_end 1016
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name Roto1
+ xpos -1250
+ ypos -537
+ disable true
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/holdouts_ddots.png
+ format "1869 246 0 0 1869 246 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read11
+ xpos -260
+ ypos 116
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay7
+ xpos -260
+ ypos 298
+}
+Transform {
+ translate {-96 61}
+ scale 0.8
+ center {530 226.5}
+ shutteroffset centred
+ name Transform8
+ xpos -260
+ ypos 327
+}
+Dot {
+ name Dot6
+ xpos -226
+ ypos 541
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant7
+ xpos -417
+ ypos 117
+}
+Reformat {
+ type "to box"
+ box_width 1024
+ box_height 515
+ box_fixed true
+ name Reformat7
+ xpos -417
+ ypos 336
+}
+Merge2 {
+ inputs 2
+ name Merge7
+ label "BBox: \[value knob.bbox]"
+ xpos -417
+ ypos 532
+}
+Crop {
+ box {0 0 1024 515}
+ crop false
+ name Crop7
+ xpos -417
+ ypos 695
+}
+Group {
+ name G_Sharpen
+ tile_color 0xff9595ff
+ xpos -417
+ ypos 735
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N28973000 [stack 0]
+push $N28973000
+ Blur {
+  channels rgba
+  size {{G_Sharpen.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N28973000
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N2810aa60 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N2810aa60
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_5
+ label "\[value name]"
+ note_font_size 33
+ xpos -383
+ ypos 1074
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/AFWrite.png
+ format "873 963 0 0 873 963 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read13
+ xpos -873
+ ypos 118
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay6
+ xpos -873
+ ypos 306
+}
+Transform {
+ translate {-169 -277}
+ scale 0.59
+ center {403 563}
+ filter Lanczos4
+ shutteroffset centred
+ name Transform7
+ xpos -873
+ ypos 330
+}
+Dot {
+ name Dot4
+ xpos -839
+ ypos 533
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant6
+ xpos -1030
+ ypos 116
+}
+Reformat {
+ type "to box"
+ box_width 512
+ box_height 512
+ box_fixed true
+ scale 0.5
+ name Reformat6
+ xpos -1030
+ ypos 345
+}
+Merge2 {
+ inputs 2
+ name Merge6
+ label "BBox: \[value knob.bbox]"
+ xpos -1030
+ ypos 524
+}
+Crop {
+ box {0 0 512 512}
+ crop false
+ name Crop6
+ xpos -1030
+ ypos 687
+}
+Group {
+ name G_Sharpen1
+ tile_color 0xff9595ff
+ xpos -1030
+ ypos 735
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N2be5af00 [stack 0]
+push $N2be5af00
+ Blur {
+  channels rgba
+  size {{G_Sharpen1.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N2be5af00
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N2d5fe620 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N2d5fe620
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_4
+ label "\[value name]"
+ note_font_size 33
+ xpos -996
+ ypos 1071
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/holdouts_setup.png
+ format "1060 453 0 0 1060 453 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read2
+ xpos -1229
+ ypos 114
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay2
+ xpos -1229
+ ypos 303
+}
+Transform {
+ translate {-16 0}
+ scale 0.9
+ center {530 226.5}
+ shutteroffset centred
+ name Transform2
+ xpos -1229
+ ypos 327
+}
+Dot {
+ name Dot3
+ xpos -1195
+ ypos 536
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant2
+ xpos -1386
+ ypos 122
+}
+Reformat {
+ type "to box"
+ box_width 1024
+ box_height 515
+ box_fixed true
+ name Reformat3
+ xpos -1386
+ ypos 341
+}
+Merge2 {
+ inputs 2
+ name Merge2
+ label "BBox: \[value knob.bbox]"
+ xpos -1386
+ ypos 527
+}
+Crop {
+ box {0 0 1024 515}
+ crop false
+ name Crop2
+ xpos -1386
+ ypos 687
+}
+Group {
+ name G_Sharpen2
+ tile_color 0xff9595ff
+ xpos -1386
+ ypos 735
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N281da410 [stack 0]
+push $N281da410
+ Blur {
+  channels rgba
+  size {{G_Sharpen2.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N281da410
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N2d475960 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N2d475960
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_3
+ label "\[value name]"
+ note_font_size 33
+ xpos -1352
+ ypos 1071
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/autocomp_all.png
+ format "962 1025 0 0 962 1025 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read10
+ xpos 180
+ ypos 106
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay8
+ xpos 180
+ ypos 295
+}
+Transform {
+ translate {-54 -24}
+ scale 0.9
+ center {336 209}
+ filter Lanczos4
+ shutteroffset centred
+ name Transform9
+ xpos 180
+ ypos 324
+ disable true
+}
+Transform {
+ translate {54 -32}
+ scale 1.1
+ center {481 512.5}
+ shutteroffset centred
+ name Transform10
+ xpos 180
+ ypos 361
+}
+Dot {
+ name Dot8
+ xpos 214
+ ypos 522
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant8
+ xpos 23
+ ypos 105
+}
+Reformat {
+ type "to box"
+ box_width 1024
+ box_height 1024
+ box_fixed true
+ scale 0.5
+ name Reformat8
+ xpos 23
+ ypos 335
+}
+Merge2 {
+ inputs 2
+ name Merge8
+ label "BBox: \[value knob.bbox]"
+ xpos 23
+ ypos 513
+}
+Crop {
+ box {0 0 1024 1024}
+ crop false
+ name Crop8
+ xpos 23
+ ypos 567
+}
+Group {
+ name G_Sharpen5
+ tile_color 0xff9595ff
+ xpos 23
+ ypos 732
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N2fd988e0 [stack 0]
+push $N2fd988e0
+ Blur {
+  channels rgba
+  size {{G_Sharpen5.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N2fd988e0
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N2fdccc20 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N2fdccc20
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_6
+ label "\[value name]"
+ note_font_size 33
+ xpos 57
+ ypos 1068
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/autocomp_hidden_inputs.png
+ format "948 1032 0 0 948 1032 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read9
+ xpos 620
+ ypos 97
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay9
+ xpos 620
+ ypos 285
+}
+Transform {
+ translate {-54 -24}
+ scale 0.9
+ center {336 209}
+ filter Lanczos4
+ shutteroffset centred
+ name Transform11
+ xpos 620
+ ypos 314
+ disable true
+}
+Transform {
+ translate {54 -32}
+ scale 1.1
+ center {481 512.5}
+ shutteroffset centred
+ name Transform12
+ xpos 620
+ ypos 351
+}
+Dot {
+ name Dot10
+ xpos 654
+ ypos 512
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant9
+ xpos 463
+ ypos 95
+}
+Reformat {
+ type "to box"
+ box_width 1024
+ box_height 1024
+ box_fixed true
+ scale 0.5
+ name Reformat9
+ xpos 463
+ ypos 325
+}
+Merge2 {
+ inputs 2
+ name Merge9
+ label "BBox: \[value knob.bbox]"
+ xpos 463
+ ypos 503
+}
+Crop {
+ box {0 0 1024 1024}
+ crop false
+ name Crop10
+ xpos 463
+ ypos 539
+}
+Group {
+ name G_Sharpen6
+ tile_color 0xff9595ff
+ xpos 463
+ ypos 722
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N2b95bc10 [stack 0]
+push $N2b95bc10
+ Blur {
+  channels rgba
+  size {{G_Sharpen6.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N2b95bc10
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N2b98ff50 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N2b98ff50
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_7
+ label "\[value name]"
+ note_font_size 33
+ xpos 497
+ ypos 1058
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "DEEP HOLDOUT"
+ note_font_size 100
+ xpos -1736
+ ypos -121
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/AFWrite_detail.png
+ format "930 978 0 0 930 978 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read12
+ xpos -871
+ ypos -1101
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/stencil_detail.png
+ format "1094 884 0 0 1094 884 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read7
+ xpos 997
+ ypos 91
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay10
+ xpos 997
+ ypos 282
+}
+Transform {
+ translate {-209 -247}
+ scale 0.53
+ center {403 563}
+ filter Lanczos4
+ shutteroffset centred
+ name Transform13
+ xpos 997
+ ypos 306
+}
+Dot {
+ name Dot11
+ xpos 1031
+ ypos 509
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant10
+ xpos 840
+ ypos 92
+}
+Reformat {
+ type "to box"
+ box_width 512
+ box_height 512
+ box_fixed true
+ scale 0.5
+ name Reformat10
+ xpos 840
+ ypos 321
+}
+Merge2 {
+ inputs 2
+ name Merge10
+ label "BBox: \[value knob.bbox]"
+ xpos 840
+ ypos 500
+}
+Crop {
+ box {0 0 512 512}
+ crop false
+ name Crop9
+ xpos 840
+ ypos 663
+}
+Group {
+ name G_Sharpen7
+ tile_color 0xff9595ff
+ xpos 840
+ ypos 711
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N714f8180 [stack 0]
+push $N714f8180
+ Blur {
+  channels rgba
+  size {{G_Sharpen7.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N714f8180
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N7111e060 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N7111e060
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_8
+ label "\[value name]"
+ note_font_size 33
+ xpos 874
+ ypos 1047
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label AUTOCOMP
+ note_font_size 100
+ xpos 293
+ ypos -169
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/deep_uberpass.png
+ format "1322 511 0 0 1322 511 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read6
+ xpos 2207
+ ypos 79
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay12
+ xpos 2207
+ ypos 268
+}
+Transform {
+ translate {-124 0}
+ scale 0.78
+ center {530 226.5}
+ shutteroffset centred
+ name Transform15
+ xpos 2207
+ ypos 292
+}
+Dot {
+ name Dot13
+ xpos 2241
+ ypos 501
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant12
+ xpos 2050
+ ypos 87
+}
+Reformat {
+ type "to box"
+ box_width 1024
+ box_height 515
+ box_fixed true
+ name Reformat12
+ xpos 2050
+ ypos 306
+}
+Merge2 {
+ inputs 2
+ name Merge12
+ label "BBox: \[value knob.bbox]"
+ xpos 2050
+ ypos 492
+}
+Crop {
+ box {0 0 1024 515}
+ crop false
+ name Crop12
+ xpos 2050
+ ypos 652
+}
+Group {
+ name G_Sharpen9
+ tile_color 0xff9595ff
+ xpos 2050
+ ypos 700
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set Nc48ec100 [stack 0]
+push $Nc48ec100
+ Blur {
+  channels rgba
+  size {{G_Sharpen9.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $Nc48ec100
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set Nc43a0470 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $Nc43a0470
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_10
+ label "\[value name]"
+ note_font_size 33
+ xpos 2084
+ ypos 1036
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/autocomo_viewer_output.png
+ format "1339 559 0 0 1339 559 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read8
+ xpos 1354
+ ypos 89
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay11
+ xpos 1354
+ ypos 271
+}
+Transform {
+ translate {-166 -27.00000381}
+ scale 0.80499998
+ center {669 280}
+ shutteroffset centred
+ name Transform14
+ xpos 1354
+ ypos 301
+}
+Dot {
+ name Dot12
+ xpos 1388
+ ypos 514
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0 0 0 0.9999997616}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant11
+ xpos 1197
+ ypos 93
+}
+Reformat {
+ type "to box"
+ box_width 1024
+ box_height 515
+ box_fixed true
+ name Reformat11
+ xpos 1197
+ ypos 309
+}
+Merge2 {
+ inputs 2
+ name Merge11
+ label "BBox: \[value knob.bbox]"
+ xpos 1197
+ ypos 505
+}
+Crop {
+ box {0 0 1024 515}
+ crop false
+ name Crop11
+ xpos 1197
+ ypos 668
+}
+Group {
+ name G_Sharpen8
+ tile_color 0xff9595ff
+ xpos 1197
+ ypos 708
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set N7095ce20 [stack 0]
+push $N7095ce20
+ Blur {
+  channels rgba
+  size {{G_Sharpen8.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $N7095ce20
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set N70d111e0 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $N70d111e0
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_9
+ label "\[value name]"
+ note_font_size 33
+ xpos 1231
+ ypos 1047
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/deep_uberpass.png
+ format "1322 511 0 0 1322 511 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read15
+ xpos 2848
+ ypos 203
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ label DEEP_UBERPASS
+ note_font_size 100
+ xpos 2000
+ ypos -169
+}
+Read {
+ inputs 0
+ file_type png
+ file /home/bmartinezcastillo/Documents/repos/deeptools/deeptools/data/deep_uberpass_detail.png
+ format "859 410 0 0 859 410 1 "
+ origset true
+ auto_alpha true
+ key1 AF_ENTITY_TYPE
+ value1 shot
+ key2 AF_SEQUENCE_NAME
+ value2 LIE
+ key3 AF_ENTITY_NAME
+ value3 LIE_1320
+ key4 LOOK
+ name Read14
+ xpos 2647
+ ypos 75
+}
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display default
+ view None
+ key1 AF_ENTITY_TYPE
+ value1 "\[getenv AF_ENTITY_TYPE _not_set_]"
+ key2 AF_SEQUENCE_NAME
+ value2 "\[getenv AF_SEQUENCE_NAME _not_set_]"
+ key3 AF_ENTITY_NAME
+ value3 "\[getenv AF_ENTITY_NAME _not_set_]"
+ key4 LOOK
+ value4 "\[getenv LOOK _not_set_]"
+ name OCIODisplay13
+ xpos 2647
+ ypos 271
+}
+Transform {
+ translate {84 36.5}
+ scale 1.19
+ center {450.5 231}
+ shutteroffset centred
+ name Transform16
+ xpos 2647
+ ypos 303
+}
+Dot {
+ name Dot14
+ xpos 2681
+ ypos 504
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1960784644 0.1960784644 0.2078431398 1}
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Constant13
+ xpos 2490
+ ypos 90
+}
+Reformat {
+ type "to box"
+ box_width 1024
+ box_height 515
+ box_fixed true
+ name Reformat13
+ xpos 2490
+ ypos 309
+}
+Merge2 {
+ inputs 2
+ name Merge13
+ label "BBox: \[value knob.bbox]"
+ xpos 2490
+ ypos 495
+}
+Crop {
+ box {0 0 1024 515}
+ crop false
+ name Crop13
+ xpos 2490
+ ypos 663
+}
+Group {
+ name G_Sharpen10
+ tile_color 0xff9595ff
+ xpos 2490
+ ypos 698
+ addUserKnob {20 User}
+ addUserKnob {7 SharpenValue R 0 10}
+ SharpenValue 1
+ addUserKnob {7 MIX}
+ MIX 1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -1240
+  ypos -128
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -1240
+  ypos -50
+ }
+set Nc8c91fa0 [stack 0]
+push $Nc8c91fa0
+ Blur {
+  channels rgba
+  size {{G_Sharpen10.SharpenValue}}
+  crop false
+  name Blur1
+  xpos -1120
+  ypos -50
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -1120
+  ypos 70
+ }
+push $Nc8c91fa0
+ Merge2 {
+  inputs 2
+  operation multiply
+  mix {{parent.MIX}}
+  name Merge2
+  selected true
+  xpos -1240
+  ypos 70
+ }
+set Nc8cc62e0 [stack 0]
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -1240
+  ypos 150
+ }
+ Output {
+  name Output1
+  xpos -1240
+  ypos 230
+ }
+push $Nc8cc62e0
+ Viewer {
+  roi {-0.4144999981 -0.2520000111 -0.2375000119 -0.1159999896}
+  input_process false
+  name Viewer1
+  xpos -1240
+  ypos 272
+ }
+end_group
+Dot {
+ name PIC_11
+ label "\[value name]"
+ note_font_size 33
+ xpos 2524
+ ypos 1039
+ addUserKnob {20 User}
+ addUserKnob {26 parent}
+}
+Viewer {
+ frame 1016
+ frame_range 1016-1093
+ fps 25
+ colour_sample_bbox {0.4039334357 -0.5832072496 0.405446291 -0.5816944242}
+ name Viewer1
+ xpos -982
+ ypos 1164
+}
