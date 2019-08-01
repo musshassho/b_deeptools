@@ -41,7 +41,11 @@ DOT_COUNT = 0
 
 
 def select_node(node_class):
-
+    """
+    This function makes sure you select a node of a given class.
+    :param node_class: passed class node
+    :return: selected node of class node_class
+    """
     class_ = node_class
 
     try:
@@ -59,7 +63,11 @@ def select_node(node_class):
 
 
 def find_dependencies(node_class):
-
+    """
+    This function will return a list with the dependencies of the selected node
+    :param node_class: passed class node
+    :return: dependencies of a selected node of class node_class
+    """
     node = select_node(node_class)
     dep_node = nuke.dependencies(node)
         
@@ -67,14 +75,18 @@ def find_dependencies(node_class):
 
 
 def get_node_position(node):
-    
+
     pos_dict = {"x_pos": node.xpos(),"y_pos": node.ypos()} 
     
     return pos_dict
 
 
 def get_righthandside_position(node_list):
-
+    """
+    This function will return the position of the right hand side node of a selection of nodes
+    :param node_list: a list of nuke nodes
+    :return: return a set of coordinates
+    """
     x_pos_list = []
     y_pos_list = []
 
@@ -93,7 +105,14 @@ def get_righthandside_position(node_list):
 
 
 def create_node_with_position(nodename,connect_node,x=0,y=0):
-
+     """
+     This function will create a node in a given position and connect it to a given node.
+     :param nodename: name of node to be created
+     :param connect_node: node to connect the created node to
+     :param x: x coordinate
+     :param y: y coordinate
+     :return: created node
+     """
      node = nuke.createNode(nodename)
      node['selected'].setValue(False)
 
@@ -105,9 +124,14 @@ def create_node_with_position(nodename,connect_node,x=0,y=0):
      return node 
 
 
-
 def create_node_with_position_simple(nodename,x=0,y=0):
-
+     """
+     This function will create a node in a given position.
+     :param nodename: name of node to be created
+     :param x: x coordinate
+     :param y: y coordinate
+     :return: created node
+     """
      node = nuke.createNode(nodename)
      node['selected'].setValue(False)
 
@@ -119,7 +143,15 @@ def create_node_with_position_simple(nodename,x=0,y=0):
 
 
 def d_dot_parent(parentname,nodename,connect_node,x=0,y=0):
-
+    """
+    This functions will create a dDot node
+    :param parentname:
+    :param nodename:
+    :param connect_node:
+    :param x:
+    :param y:
+    :return:
+    """
     parentName = parentname
     parentKnob = nuke.Text_Knob('parent', 'parent')
 
@@ -134,7 +166,11 @@ def d_dot_parent(parentname,nodename,connect_node,x=0,y=0):
 
 
 def build_depth_setup(node_list):
+    """
 
+    :param node_list:
+    :return:
+    """
     positions = get_righthandside_position(node_list)
 
     deep_merge = create_node_with_position_simple("DeepMerge",positions[1] +  500, positions[2]+100)
@@ -175,7 +211,11 @@ def build_depth_setup(node_list):
 
 
 def get_asset_name(sourcenode):
-   
+    """
+
+    :param sourcenode:
+    :return:
+    """
     source_node = nuke.toNode(sourcenode)
     target_class = "DeepRead"
     dep_nodes = nuke.dependencies(source_node) 
@@ -194,7 +234,11 @@ def get_asset_name(sourcenode):
 
 
 def create_deep_holdout_setup(node_class):
+    """
 
+    :param node_class:
+    :return:
+    """
     global DOT_COUNT
 
     
@@ -261,7 +305,12 @@ def create_deep_holdout_setup(node_class):
 
 
 def check_upstream_match(sourcenode,targetnode):
-   
+    """
+
+    :param sourcenode:
+    :param targetnode:
+    :return:
+    """
     source_node = nuke.toNode(sourcenode)
     target_node = nuke.toNode(targetnode)
     dep_nodes = nuke.dependencies(source_node) 
@@ -276,7 +325,10 @@ def check_upstream_match(sourcenode,targetnode):
 
 
 def iterate_deep_holdout_setup():
+    """
 
+    :return:
+    """
     names = []
     deep_holdouts = []
     selected_nodes = []
@@ -319,7 +371,10 @@ def iterate_deep_holdout_setup():
 
 
 def get_middle_position():
+    """
 
+    :return:
+    """
     x_pos_list = []
     y_pos_list = []
 
@@ -340,7 +395,11 @@ def get_middle_position():
 
 
 def create_rgba_deep_recolor(channels):
+    """
 
+    :param channels:
+    :return:
+    """
     new_deep_recolor_names = []    
 
     for node in nuke.selectedNodes():
@@ -365,7 +424,9 @@ def create_rgba_deep_recolor(channels):
 
 
 def uberpass_function():
+    """
 
+    """
     node_list = []
 
     for node in nuke.selectedNodes():
@@ -405,7 +466,9 @@ def uberpass_function():
 
 
 def depth_for_defocus():
+    """
 
+    """
     node_list = []
 
     for node in nuke.selectedNodes():
@@ -447,7 +510,7 @@ def depth_for_defocus():
 
 
 def splitLayers( node ):
-    
+
     '''
     Splits each and every layer from the selected node into their own pipes
     '''
@@ -509,7 +572,14 @@ def splitLayers( node ):
 
 
 def d_dot_connect(nodename,connect_node,x=0,y=0):
+    """
 
+    :param nodename:
+    :param connect_node:
+    :param x:
+    :param y:
+    :return:
+    """
     parent_node = nuke.toNode(connect_node)
     childKnob = nuke.Text_Knob('child', 'child')
 
@@ -525,14 +595,21 @@ def d_dot_connect(nodename,connect_node,x=0,y=0):
 
 
 def gather_holdout_dot_names():
-    
+    """
+
+    :return:
+    """
     holdout_dots_names = [node['name'].value() for node in nuke.selectedNodes() if node['parent']]
     
     return holdout_dots_names
 
 
 def find_holdout_source_elements(houldout_names):
-    
+    """
+
+    :param houldout_names:
+    :return:
+    """
     houldout_processed_list = [] 
         
     for name in houldout_names:
@@ -546,7 +623,11 @@ def find_holdout_source_elements(houldout_names):
 
 
 def create_and_connect_child_dots(holdouts,color):
-    
+    """
+
+    :param holdouts:
+    :param color:
+    """
     multiply_list = []
     counter = 0
     adder = 0

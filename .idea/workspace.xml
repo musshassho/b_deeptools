@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e21e4b5b-a037-47b0-a550-c0e4201d5724" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/b_deeptools.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deeptools/data/b_deeptools_sandbox_v001.nknc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deeptools/data/b_deeptools_sandbox_v001.nknc.autosave" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deeptools/src/b_deeptools.py" beforeDir="false" afterPath="$PROJECT_DIR$/deeptools/src/b_deeptools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/b_deeptools_snapshots_v001.nknc" beforeDir="false" afterPath="$PROJECT_DIR$/deeptools/data/b_deeptools_snapshots_v001.nknc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="31" column="88" selection-start-line="31" selection-start-column="88" selection-end-line="31" selection-end-column="88" />
+            <state relative-caret-position="2724">
+              <caret line="626" lean-forward="true" selection-start-line="626" selection-end-line="626" />
             </state>
           </provider>
         </entry>
@@ -32,7 +26,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
+            <state relative-caret-position="4026">
               <caret line="270" column="64" selection-start-line="270" selection-start-column="64" selection-end-line="270" selection-end-column="64" />
             </state>
           </provider>
@@ -51,7 +45,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
@@ -62,7 +56,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -85,6 +78,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -118,9 +112,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49799198" visible="true" weight="0.24966975" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.502008" side_tool="true" visible="true" weight="0.24966975" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4939759" visible="true" weight="0.24966975" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.5060241" side_tool="true" visible="true" weight="0.24966975" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -141,15 +136,15 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
+        <state relative-caret-position="4026">
           <caret line="270" column="64" selection-start-line="270" selection-start-column="64" selection-end-line="270" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="31" column="88" selection-start-line="31" selection-start-column="88" selection-end-line="31" selection-end-column="88" />
+        <state relative-caret-position="2724">
+          <caret line="626" lean-forward="true" selection-start-line="626" selection-end-line="626" />
         </state>
       </provider>
     </entry>
