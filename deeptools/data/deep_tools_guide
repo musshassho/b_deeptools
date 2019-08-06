@@ -83,11 +83,31 @@ Instructions:
 - insert pic 10 here (uberpass)
 
 2 - As you see, there are two deepMerge setups: one for rendering out all the combined color together with all the Aovs. The other to DeepWrite out the combined deep data.
-
-
-
+ 
 
 depth_from_deep
 
 
-autocomp
+This tool is going to extract a clean depth pass from the deep data for later use in the comp along with your favourite z-defocus tool, for creating fog effects, for grading black levels... you name it. 
+
+
+Instructions:
+
+insert pic 1 here
+
+1 - Select all your deepRecolor nodes and click on the "depth_from_deep" button.
+
+2 - In less than a second, you should see a setup like this one:
+
+insert pic 11
+
+3 - Btw, notice how the tool has created a new set of DeepRecolor nodes, colored in pink. This is as, for the depth to be correct, the target input alpha has to be NOT clicked. Otherwise you'd have weird edge problems.
+
+4 - Also, take a look at the expression node
+
+4 - Finally, just precomp it and use it where needed in the comp.
+
+
+
+
+ A toolbox to help with organising your scripts and working in a fast, flexible and efficient way using dots & labels
