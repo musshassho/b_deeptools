@@ -138,7 +138,6 @@ def create_node_with_position_simple(nodename,x=0,y=0):
      node.setXpos(int(x))
      node.setYpos(int(y))
 
-
      return node
 
 
