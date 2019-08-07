@@ -76,7 +76,7 @@ def find_dependencies(node_class):
 
 
 def get_node_position(node):
-     """
+    """
     This function will return the position of a node.
     :param node: a nuke node object.
     :return: return a set of coordinates.
@@ -142,6 +142,7 @@ def create_node_with_position_simple(nodename,x=0,y=0):
 
      node.setXpos(int(x))
      node.setYpos(int(y))
+
 
      return node
 
@@ -228,11 +229,14 @@ def get_asset_name(sourcenode):
         if node.Class() == target_class:
             try: 
                 asset_name = node["sg_layer"].value()
-                return asset_name
+                if asset_name == "":
+                    default_asset_name =  "element_01"
+                    return default_asset_name
+                else:
+                    return asset_name
             except ValueError:
                 print "no asset name found"
                 asset_name = "element_01"    
-
                 return asset_name
         else:
             return get_asset_name(node.name())
@@ -450,9 +454,13 @@ def uberpass_function():
     deep_to_image_pos = get_node_position(deep_to_image)
 
     switch = create_node_with_position("Switch",deep_to_image,deep_to_image_pos["x_pos"],deep_to_image_pos["y_pos"]+ 200)
-    
+    switch_pos = get_node_position(switch)
+    switch_dot = create_node_with_position_simple("Dot",switch_pos["x_pos"]-150,switch_pos["y_pos"])
+    switch.setInput(1,switch_dot)
+    switch['label'].setValue("[value which]")
+
     string = "uberpass_color_output"
-    last_dot = d_dot_parent(string,"Dot",deep_to_image,deep_to_image_pos["x_pos"]+35,deep_to_image_pos["y_pos"]+ 100)
+    last_dot = d_dot_parent(string,"Dot",switch,switch_pos["x_pos"]+35,switch_pos["y_pos"]+ 100)
 
     write = create_node_with_position("Write",last_dot,get_node_position(last_dot)["x_pos"],get_node_position(last_dot)["y_pos"] + 200)
     write['channels'].setValue('all')    
@@ -470,24 +478,6 @@ def uberpass_function():
     deep_write =  create_node_with_position("DeepWrite",deep_deep_merge,get_node_position(deep_deep_merge)["x_pos"],get_node_position(deep_deep_merge)["y_pos"] + 200) 
 
 
-
-
-        switch = create_node_with_position("Switch",shuffle,pos6["x_pos"],pos6["y_pos"]+ 200)
-
-    pos7 = get_node_position(switch)
-
-    switch_dot = create_node_with_position_simple("Dot",pos7["x_pos"]-150,pos7["y_pos"])
-    
-    switch.setInput(1,switch_dot)
-    switch['label'].setValue("[value which]")
-
-
-    last_dot = d_dot_parent(string,"Dot",switch,pos7["x_pos"]+35,pos7["y_pos"]+ 500)
-
-    pos8 = get_node_position(last_dot
-
-
-    
 
 # DEPTH FOR DEFOCUS #######################################################################################################
 
