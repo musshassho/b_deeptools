@@ -1,0 +1,310 @@
+#! C:/Program Files/Nuke12.0v1/nuke-12.0.1.dll -nx
+version 12.0 v1
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-1921" y="-8" w="1920" h="1057" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1876" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1013"/>
+                <dock id="" activePageId="Viewer.1" focus="true">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="-1" y="-9" w="1920" h="1051" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="1366"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+                <page id="Curve Editor.1"/>
+                <page id="DopeSheet.1"/>
+            </dock>
+            <split size="550"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name C:/stuff/03_repos/b_deeptools/deeptools/data/scripts/b_deeptools_example_scene_01.nk
+ frame 29
+ fps 25
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Project3D2 {
+ inputs 0
+ name Project3D1
+ xpos -304
+ ypos -273
+}
+Card2 {
+ inputs 0
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ xpos -322
+ ypos -188
+}
+UVProject {
+ name UVProject1
+ xpos -322
+ ypos -41
+}
+Reformat {
+ inputs 0
+ format "256 256 0 0 256 256 1 square_256"
+ name Reformat1
+ xpos 678
+ ypos -386
+}
+Roto {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {px x424c0000
+        {xc19638c0 0}
+        {x43050018 x42be99a7}
+        {x419638c0 0}
+        {0 xc19638c0}
+        {x43270018 x43014cd3}
+        {0 x419638c0}
+        {x419638c0 0}
+        {x43050018 x43234cd3}
+        {xc19638c0 0}
+        {0 x419638c0}
+        {x42c60030 x43014cd3}
+        {0 xc19638c0}}}
+      {cc
+       {f 8192}
+       {px x424c0000
+        {xc19638c0 0}
+        {0 0}
+        {x419638c0 0}
+        {0 xc19638c0}
+        {0 0}
+        {0 x419638c0}
+        {x419638c0 0}
+        {0 0}
+        {xc19638c0 0}
+        {0 x419638c0}
+        {0 0}
+        {0 xc19638c0}}}}
+     {tx x424c0000 x448ec000 x44388000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x424c0000 ltm x424c0000 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {960 540}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 51
+ lifetime_end 51
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name Roto1
+ xpos 678
+ ypos -320
+}
+Camera2 {
+ inputs 0
+ translate {-0.06923784 1.90515423 18.16474915}
+ rotate {-6.999998093 1.600001097 -8.064237988e-08}
+ name Camera1
+ xpos -40
+ ypos 236
+}
+Dot {
+ name Dot1
+ xpos 132
+ ypos 260
+}
+set N46675000 [stack 0]
+Dot {
+ name Dot2
+ xpos 437
+ ypos 260
+}
+set N46674800 [stack 0]
+Dot {
+ name Dot3
+ xpos 653
+ ypos 260
+}
+Constant {
+ inputs 0
+ channels {-rgba.red rgba.green -rgba.blue none}
+ color 0.275
+ name Constant3
+ xpos 697
+ ypos -82
+}
+Cube {
+ name Cube1
+ xpos 697
+ ypos 25
+}
+TransformGeo {
+ translate {{curve x1 -2 x10 0.01499999966 x20 1.985000014 -0.004999999888 -2.005000114} {curve x1 0 x10 0 x20 0 0 0} {curve x1 0 x10 -3.00999999 x20 -0.08500000089 1.960000038 0.03999999911}}
+ name TransformGeo3
+ xpos 697
+ ypos 109
+}
+TransformGeo {
+ translate {-1.169998765 -0.2499999851 0}
+ uniform_scale 0.88
+ name TransformGeo6
+ xpos 697
+ ypos 185
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender3
+ xpos 697
+ ypos 340
+}
+push $N46674800
+Constant {
+ inputs 0
+ channels {rgba.red rgba.green -rgba.blue none}
+ color 0.32
+ name Constant2
+ xpos 495
+ ypos -76
+}
+Cylinder {
+ name Cylinder1
+ xpos 495
+ ypos 29
+}
+TransformGeo {
+ translate {{curve x1 0} {curve x1 0} {curve x1 0}}
+ name TransformGeo2
+ xpos 495
+ ypos 115
+}
+TransformGeo {
+ translate {-1.169998765 -0.2499999851 0}
+ uniform_scale 0.88
+ name TransformGeo5
+ xpos 495
+ ypos 184
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender2
+ xpos 495
+ ypos 345
+}
+push $N46675000
+Constant {
+ inputs 0
+ channels {-rgba.red rgba.green rgba.blue}
+ color 0.315
+ name Constant1
+ xpos 265
+ ypos -72
+}
+Sphere {
+ name Sphere1
+ xpos 265
+ ypos 38
+}
+TransformGeo {
+ translate {{curve x1 3 x10 0 x21 -3 x30 0 x40 3} {curve x1 0 x10 0 x21 0 x30 0 x40 0} {curve x1 0 x10 3 x21 0 x30 -3 x40 0}}
+ name TransformGeo1
+ xpos 265
+ ypos 118
+}
+TransformGeo {
+ translate {-1.169998765 -0.2499999851 0}
+ uniform_scale 0.88
+ name TransformGeo4
+ xpos 265
+ ypos 183
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender1
+ xpos 265
+ ypos 348
+}
+DeepMerge2 {
+ inputs 3
+ name DeepMerge1
+ selected true
+ xpos 265
+ ypos 471
+}
+Viewer {
+ frame 29
+ frame_range 1-100
+ fps 25
+ softSelect true
+ name Viewer1
+ xpos -216
+ ypos -52
+}

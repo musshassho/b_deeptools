@@ -3,7 +3,34 @@
   <component name="ChangeListManager">
     <list default="true" id="e21e4b5b-a037-47b0-a550-c0e4201d5724" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/AFWrite.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/AFWrite_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/AOVs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/Class_2dTrickery_v1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/MPC_AF_DeepSetups.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/Screenshot from 2019-07-09 16-14-04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/all_lgt_elements.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/autocomo_viewer_output.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/autocomp_all.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/autocomp_hidden_inputs.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/b_deeptools_sandbox_v001.nknc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/b_deeptools_sandbox_v001.nknc.autosave" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/b_deeptools_snapshots_v001.nknc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/b_deeptools_snapshots_v002.nknc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/deep_tools_guide" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/deep_toolset_properties_bin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/deep_uberpass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/deep_uberpass_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/deeptools_snapshots_v001.nk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/depth_from_deep_inputalpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/depthfromdeep_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/depthfromdeepall.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/hold_outs_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/holdouts_ddots.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/holdouts_setup.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/lgt_element.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/data/stencil_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deeptools/src/b_deeptools_gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/deeptools/src/b_deeptools_gui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +43,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="102" column="4" selection-start-line="102" selection-start-column="4" selection-end-line="102" selection-end-column="4" />
+            <state relative-caret-position="-153">
+              <caret line="129" selection-start-line="129" selection-end-line="129" />
               <folding>
                 <element signature="e#385#396#0" expanded="true" />
               </folding>
@@ -26,10 +53,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools.py">
+        <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools_gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4539">
-              <caret line="270" column="64" selection-start-line="270" selection-start-column="64" selection-end-line="270" selection-end-column="64" />
+            <state relative-caret-position="1340">
+              <caret line="136" selection-start-line="136" selection-end-line="136" />
+              <folding>
+                <element signature="e#1#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -44,6 +86,8 @@
       <list>
         <option value="$PROJECT_DIR$/deeptools/src/b_deeptools.py" />
         <option value="$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py" />
+        <option value="$PROJECT_DIR$/deeptools/src/b_deeptools_gui.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
       </list>
     </option>
   </component>
@@ -58,7 +102,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -81,11 +124,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/deeptools/src" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -104,6 +150,34 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="scratch_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="b_deeptools" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.scratch_2" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -118,14 +192,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49129853" visible="true" weight="0.24966975" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.50870144" side_tool="true" visible="true" weight="0.24966975" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48598132" visible="true" weight="0.24920969" />
+      <window_info id="Structure" order="1" sideWeight="0.5140187" side_tool="true" visible="true" weight="0.24920969" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32931727" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -140,20 +214,34 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py">
+    <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools.py" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="102" column="4" selection-start-line="102" selection-start-column="4" selection-end-line="102" selection-end-column="4" />
+        <state relative-caret-position="510">
+          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
           <folding>
-            <element signature="e#385#396#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools.py">
+    <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools_gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4539">
-          <caret line="270" column="64" selection-start-line="270" selection-start-column="64" selection-end-line="270" selection-end-column="64" />
+        <state relative-caret-position="1340">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deeptools/src/b_deeptools_tmp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="129" selection-start-line="129" selection-end-line="129" />
+          <folding>
+            <element signature="e#385#396#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

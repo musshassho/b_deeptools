@@ -1,0 +1,785 @@
+#! C:/Program Files/Nuke12.0v1/nuke-12.0.1.dll -nx
+version 12.0 v1
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-1921" y="-8" w="1920" h="1057" maximized="1" screen="1">
+        <splitter orientation="1">
+            <split size="46"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1870" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1013"/>
+                <dock id="" activePageId="Viewer.1" focus="true">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="-1" y="-9" w="1920" h="1051" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="1366"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+                <page id="Curve Editor.1"/>
+                <page id="DopeSheet.1"/>
+            </dock>
+            <split size="550"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name C:/stuff/03_repos/b_deeptools/deeptools/data/scripts/b_deeptools_example_scene_01.nk
+ frame 11
+ last_frame 40
+ fps 25
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Camera2 {
+ inputs 0
+ translate {-0.06923784 1.90515423 18.16474915}
+ rotate {-6.999998093 1.600001097 -8.064237988e-08}
+ name Camera1
+ xpos -47
+ ypos 208
+}
+Dot {
+ name Dot1
+ xpos 125
+ ypos 232
+}
+set N4a0e0c00 [stack 0]
+Dot {
+ name Dot2
+ xpos 430
+ ypos 232
+}
+set N4a0e0800 [stack 0]
+Dot {
+ name Dot3
+ xpos 646
+ ypos 232
+}
+set N4a0e0400 [stack 0]
+Dot {
+ name Dot4
+ xpos 845
+ ypos 232
+}
+Reformat {
+ inputs 0
+ format "256 256 0 0 256 256 1 square_256"
+ name Reformat3
+ xpos 1261
+ ypos -177
+}
+Roto {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {px
+        {xc0000000 1}
+        {{{xc2331070 0 1 xc0d03125 1}
+       {xc280916f xc0d03125 1 0 1}}
+      {{0 -}}}
+        {{{x43050018 -}}
+      {{x4240f9f8 0 1 xc13c7b74 1}
+       {x414e7584 xc13c7b74 1 0 1}}}
+        {{{x42331070 0 1 x40d03120 1}
+       {x4280916e x40d03120 1 0 1}}
+      {{0 -}}}
+        {{{0 -}}
+      {{xc2331070 0 1 xc0d0312b 1}
+       {xc2809170 xc0d0312b 1 0 1}}}
+        {{{x43560e6d 0 1 x413c7b70 1}
+       {x43796592 x413c7b70 1 0 1}}
+      {{x43014cd3 -}}}
+        {{{0 -}}
+      {{x42331070 0 1 x40d03120 1}
+       {x4280916e x40d03120 1 0 1}}}
+        {{{x42331070 0 1 x40d03120 1}
+       {x4280916e x40d03120 1 0 1}}
+      {{0 -}}}
+        {{{x43050018 -}}
+      {{x43525b29 0 1 x413c7b70 1}
+       {x4375b24e x413c7b70 1 0 1}}}
+        {{{xc2331070 0 1 xc0d03125 1}
+       {xc280916f xc0d03125 1 0 1}}
+      {{0 -}}}
+        {{{0 -}}
+      {{x42331070 0 1 x40d03120 1}
+       {x4280916e x40d03120 1 0 1}}}
+        {{{x424fc704 0 1 xc13c7b75 1}
+       {x4184d4d8 xc13c7b75 1 0 1}}
+      {{x43014cd3 -}}}
+        {{{0 -}}
+      {{xc2331070 0 1 xc0d0312b 1}
+       {xc2809170 xc0d0312b 1 0 1}}}}}     idem}
+     {t x448ec000 x44388000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x424c0000 ltm x424c0000 tt x40e00000 b x3c343958 g x3dae147b}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {960 540}
+ color {1 0.085 0.011 1}
+ color_panelDropped true
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 51
+ lifetime_end 51
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name Roto3
+ xpos 1261
+ ypos -86
+}
+Reformat {
+ inputs 0
+ format "256 256 0 0 256 256 1 square_256"
+ name Reformat2
+ xpos 1154
+ ypos -184
+}
+Roto {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {px
+        {xc0000000 1}
+        {{{xc2331070 0 1 xc0d03125 1}
+       {xc280916f xc0d03125 1 0 1}}
+      {{0 -}}}
+        {{{x43050018 -}}
+      {{x4240f9f8 0 1 xc13c7b74 1}
+       {x414e7584 xc13c7b74 1 0 1}}}
+        {{{x42331070 0 1 x40d03120 1}
+       {x4280916e x40d03120 1 0 1}}
+      {{0 -}}}
+        {{{0 -}}
+      {{xc2331070 0 1 xc0d0312b 1}
+       {xc2809170 xc0d0312b 1 0 1}}}
+        {{{x43560e6d 0 1 x413c7b70 1}
+       {x43796592 x413c7b70 1 0 1}}
+      {{x43014cd3 -}}}
+        {{{0 -}}
+      {{x42331070 0 1 x40d03120 1}
+       {x4280916e x40d03120 1 0 1}}}
+        {{{x42331070 0 1 x40d03120 1}
+       {x4280916e x40d03120 1 0 1}}
+      {{0 -}}}
+        {{{x43050018 -}}
+      {{x43525b29 0 1 x413c7b70 1}
+       {x4375b24e x413c7b70 1 0 1}}}
+        {{{xc2331070 0 1 xc0d03125 1}
+       {xc280916f xc0d03125 1 0 1}}
+      {{0 -}}}
+        {{{0 -}}
+      {{x42331070 0 1 x40d03120 1}
+       {x4280916e x40d03120 1 0 1}}}
+        {{{x424fc704 0 1 xc13c7b75 1}
+       {x4184d4d8 xc13c7b75 1 0 1}}
+      {{x43014cd3 -}}}
+        {{{0 -}}
+      {{xc2331070 0 1 xc0d0312b 1}
+       {xc2809170 xc0d0312b 1 0 1}}}}}     idem}
+     {t x448ec000 x44388000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x424c0000 ltm x424c0000 tt x40e00000 r 0 b x3e333333}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {960 540}
+ color {0 1 0.175 1}
+ color_panelDropped true
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 51
+ lifetime_end 51
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name Roto2
+ xpos 1154
+ ypos -87
+}
+Reformat {
+ inputs 0
+ format "256 256 0 0 256 256 1 square_256"
+ name Reformat1
+ xpos 1043
+ ypos -184
+}
+Roto {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {px
+        {xc0000000 1}
+        {{{xc2331070 0 1 xc0890b35 1}
+       {xc280916f xc0890b35 1 0 1}}
+      {{0 -}}}
+        {{{x43050018 -}}
+      {{x4240f9f8 0 1 xc0f823b5 1}
+       {x414e7584 xc0f823b5 1 0 1}}}
+        {{{x42331070 0 1 x40890b35 1}
+       {x4280916e x40890b35 1 0 1}}
+      {{0 -}}}
+        {{{0 -}}
+      {{xc2331070 0 1 xc0890b35 1}
+       {xc2809170 xc0890b35 1 0 1}}}
+        {{{x43560e6d 0 1 x40f823ab 1}
+       {x43796592 x40f823ab 1 0 1}}
+      {{x43014cd3 -}}}
+        {{{0 -}}
+      {{x42331070 0 1 x40890b35 1}
+       {x4280916e x40890b35 1 0 1}}}
+        {{{x42331070 0 1 x40890b35 1}
+       {x4280916e x40890b35 1 0 1}}
+      {{0 -}}}
+        {{{x43050018 -}}
+      {{x43525b29 0 1 x40f823a0 1}
+       {x4375b24e x40f823a0 1 0 1}}}
+        {{{xc2331070 0 1 xc0890b35 1}
+       {xc280916f xc0890b35 1 0 1}}
+      {{0 -}}}
+        {{{0 -}}
+      {{x42331070 0 1 x40890b35 1}
+       {x4280916e x40890b35 1 0 1}}}
+        {{{x424fc704 0 1 xc0f823b0 1}
+       {x4184d4d8 xc0f823b0 1 0 1}}
+      {{x43014cd3 -}}}
+        {{{0 -}}
+      {{xc2331070 0 1 xc0890b35 1}
+       {xc2809170 xc0890b35 1 0 1}}}}}     idem}
+     {t x448ec000 x44388000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x424c0000 ltm x424c0000 tt x40e00000 g 0 r 0}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {960 540}
+ color {0 0 1 1}
+ color_panelDropped true
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 51
+ lifetime_end 51
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name Roto1
+ xpos 1043
+ ypos -87
+}
+Card2 {
+ inputs 0
+ rotate {90 0 0}
+ scaling {0.5 1 1}
+ uniform_scale 5
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card2
+ xpos 928
+ ypos -139
+}
+push 0
+ParticleEmitter {
+ inputs 5
+ start_frame -15
+ emit_order uniformly
+ lifetime 5
+ size 0.105
+ size_variation 0.42
+ mass_variation 0.56
+ spread 0.3
+ input_order "in order"
+ frame_advance constant
+ name ParticleEmitter1
+ xpos 928
+ ypos -3
+}
+ParticleDirectionalForce {
+ strength {0 1.2 0}
+ name ParticleDirectionalForce1
+ xpos 928
+ ypos 64
+}
+ParticleGravity {
+ to {0 -0.75 0}
+ name ParticleGravity1
+ xpos 928
+ ypos 111
+}
+ParticleExpression {
+ colexpr random()
+ massexpr 1
+ name ParticleExpression1
+ xpos 928
+ ypos 181
+}
+ParticleSettings {
+ steps_per_frame 25
+ name ParticleSettings2
+ xpos 928
+ ypos 232
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender4
+ xpos 928
+ ypos 320
+}
+set N4e06fc00 [stack 0]
+DeepWrite {
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_particles.####.exr
+ file_type exr
+ name DeepWrite4
+ xpos 928
+ ypos 556
+}
+push $N4a0e0400
+Constant {
+ inputs 0
+ channels {-rgba.red rgba.green -rgba.blue none}
+ color 0.275
+ name Constant3
+ xpos 697
+ ypos -205
+}
+Cube {
+ name Cube1
+ xpos 697
+ ypos -25
+}
+TransformGeo {
+ translate {{curve x1 -2 x10 0.01499999966 x20 1.985000014 -0.004999999888 -2.005000114} {curve x1 0 x10 0 x20 0 0 0} {curve x1 0 x10 -3.00999999 x20 -0.08500000089 1.960000038 0.03999999911}}
+ name TransformGeo3
+ xpos 697
+ ypos 59
+}
+TransformGeo {
+ translate {-1.169998765 -0.2499999851 0}
+ uniform_scale 0.88
+ name TransformGeo6
+ xpos 697
+ ypos 135
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender3
+ xpos 697
+ ypos 324
+}
+set N4a00f400 [stack 0]
+DeepWrite {
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_cube.####.exr
+ file_type exr
+ name DeepWrite3
+ xpos 697
+ ypos 553
+}
+push $N4a0e0c00
+Constant {
+ inputs 0
+ channels {-rgba.red rgba.green rgba.blue none}
+ color 0.315
+ name Constant1
+ xpos 265
+ ypos -206
+}
+Sphere {
+ name Sphere1
+ xpos 265
+ ypos -18
+}
+TransformGeo {
+ translate {{curve x1 3 x10 0 x21 -3 x30 0 x40 3} {curve x1 0 x10 0 x21 0 x30 0 x40 0} {curve x1 0 x10 3 x21 0 x30 -3 x40 0}}
+ name TransformGeo1
+ xpos 265
+ ypos 68
+}
+TransformGeo {
+ translate {-1.169998765 -0.2499999851 0}
+ uniform_scale 0.88
+ name TransformGeo4
+ xpos 265
+ ypos 133
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender1
+ xpos 265
+ ypos 324
+}
+set N1948ec00 [stack 0]
+DeepWrite {
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_sphere.####.exr
+ file_type exr
+ name DeepWrite1
+ xpos 265
+ ypos 559
+}
+push $N4a0e0800
+Constant {
+ inputs 0
+ channels {rgba.red rgba.green -rgba.blue none}
+ color 0.32
+ name Constant2
+ xpos 495
+ ypos -205
+}
+Cylinder {
+ name Cylinder1
+ xpos 495
+ ypos -20
+}
+TransformGeo {
+ translate {{curve x1 0} {curve x1 0} {curve x1 0}}
+ name TransformGeo2
+ xpos 495
+ ypos 65
+}
+TransformGeo {
+ translate {-1.169998765 -0.2499999851 0}
+ uniform_scale 0.88
+ name TransformGeo5
+ xpos 495
+ ypos 134
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender2
+ xpos 495
+ ypos 324
+}
+set N4a00e000 [stack 0]
+DeepWrite {
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_cylinder.####.exr
+ file_type exr
+ name DeepWrite2
+ xpos 495
+ ypos 562
+}
+push $N4a00e000
+Write {
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_cylinder_color.####.exr
+ file_type exr
+ first_part rgba
+ version 1
+ name Write2
+ xpos 371
+ ypos 434
+ addUserKnob {20 view_presets l "View Presets"}
+ addUserKnob {4 viewPresets l "View Presets" M {main stereo cams "stereo cams" all}}
+ addUserKnob {22 set l Set -STARTLINE T "w = nuke.thisNode()\nscriptViews = nuke.views()\nviewPreset = w\['viewPresets'].getValue()\nselectedViews = None\nif viewPreset == 0:\n  selectedViews = \['main']\nif viewPreset == 1:\n  stereoViews = \['left', 'right']\n  if set(stereoViews).issubset(set(scriptViews)):\n    selectedViews = stereoViews\n  else:\n    selectedViews = None\nelif viewPreset == 2:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and not ('_left' in v or '_right' in v)]\nelif viewPreset == 3:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and ('_left' in v or '_right' in v)]\nelif viewPreset == 4:\n  selectedViews = scriptViews\nif selectedViews:\n  w\['views'].fromScript(' '.join(selectedViews))\n"}
+}
+push $N4e06fc00
+Write {
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_particles_color.####.exr
+ file_type exr
+ first_part rgba
+ version 1
+ name Write4
+ xpos 829
+ ypos 430
+ addUserKnob {20 view_presets l "View Presets"}
+ addUserKnob {4 viewPresets l "View Presets" M {main stereo cams "stereo cams" all}}
+ addUserKnob {22 set l Set -STARTLINE T "w = nuke.thisNode()\nscriptViews = nuke.views()\nviewPreset = w\['viewPresets'].getValue()\nselectedViews = None\nif viewPreset == 0:\n  selectedViews = \['main']\nif viewPreset == 1:\n  stereoViews = \['left', 'right']\n  if set(stereoViews).issubset(set(scriptViews)):\n    selectedViews = stereoViews\n  else:\n    selectedViews = None\nelif viewPreset == 2:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and not ('_left' in v or '_right' in v)]\nelif viewPreset == 3:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and ('_left' in v or '_right' in v)]\nelif viewPreset == 4:\n  selectedViews = scriptViews\nif selectedViews:\n  w\['views'].fromScript(' '.join(selectedViews))\n"}
+}
+push $N4a00f400
+Write {
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_cube_color.####.exr
+ file_type exr
+ first_part rgba
+ version 2
+ name Write3
+ xpos 600
+ ypos 435
+ addUserKnob {20 view_presets l "View Presets"}
+ addUserKnob {4 viewPresets l "View Presets" M {main stereo cams "stereo cams" all}}
+ addUserKnob {22 set l Set -STARTLINE T "w = nuke.thisNode()\nscriptViews = nuke.views()\nviewPreset = w\['viewPresets'].getValue()\nselectedViews = None\nif viewPreset == 0:\n  selectedViews = \['main']\nif viewPreset == 1:\n  stereoViews = \['left', 'right']\n  if set(stereoViews).issubset(set(scriptViews)):\n    selectedViews = stereoViews\n  else:\n    selectedViews = None\nelif viewPreset == 2:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and not ('_left' in v or '_right' in v)]\nelif viewPreset == 3:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and ('_left' in v or '_right' in v)]\nelif viewPreset == 4:\n  selectedViews = scriptViews\nif selectedViews:\n  w\['views'].fromScript(' '.join(selectedViews))\n"}
+}
+push $N1948ec00
+Write {
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_sphere_color.####.exr
+ file_type exr
+ first_part rgba
+ version 2
+ name Write1
+ xpos 168
+ ypos 427
+ addUserKnob {20 view_presets l "View Presets"}
+ addUserKnob {4 viewPresets l "View Presets" M {main stereo cams "stereo cams" all}}
+ addUserKnob {22 set l Set -STARTLINE T "w = nuke.thisNode()\nscriptViews = nuke.views()\nviewPreset = w\['viewPresets'].getValue()\nselectedViews = None\nif viewPreset == 0:\n  selectedViews = \['main']\nif viewPreset == 1:\n  stereoViews = \['left', 'right']\n  if set(stereoViews).issubset(set(scriptViews)):\n    selectedViews = stereoViews\n  else:\n    selectedViews = None\nelif viewPreset == 2:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and not ('_left' in v or '_right' in v)]\nelif viewPreset == 3:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and ('_left' in v or '_right' in v)]\nelif viewPreset == 4:\n  selectedViews = scriptViews\nif selectedViews:\n  w\['views'].fromScript(' '.join(selectedViews))\n"}
+}
+Read {
+ inputs 0
+ file_type exr
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_cube_color.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 40
+ origlast 40
+ origset true
+ version 3
+ name Read4
+ xpos 1571
+ ypos -88
+}
+Dot {
+ name Dot5
+ xpos 1605
+ ypos 165
+}
+DeepRead {
+ inputs 0
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_cube.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 40
+ origlast 40
+ origset true
+ name DeepRead1
+ selected true
+ xpos 1750
+ ypos -93
+}
+DeepRecolor {
+ inputs 2
+ name DeepRecolor1
+ selected true
+ xpos 1750
+ ypos 161
+}
+Read {
+ inputs 0
+ file_type exr
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_cylinder_color.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 40
+ origlast 40
+ origset true
+ name Read1
+ selected true
+ xpos 2280
+ ypos -98
+}
+Dot {
+ name Dot7
+ selected true
+ xpos 2314
+ ypos 160
+}
+DeepRead {
+ inputs 0
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_cylinder.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 40
+ origlast 40
+ origset true
+ name DeepRead2
+ selected true
+ xpos 2459
+ ypos -98
+}
+DeepRecolor {
+ inputs 2
+ name DeepRecolor3
+ selected true
+ xpos 2459
+ ypos 156
+}
+Read {
+ inputs 0
+ file_type exr
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_particles_color.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 40
+ origlast 40
+ origset true
+ name Read2
+ selected true
+ xpos 2656
+ ypos -99
+}
+Dot {
+ name Dot8
+ selected true
+ xpos 2690
+ ypos 159
+}
+DeepRead {
+ inputs 0
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_particles.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 40
+ origlast 40
+ origset true
+ name DeepRead3
+ selected true
+ xpos 2835
+ ypos -99
+}
+DeepRecolor {
+ inputs 2
+ name DeepRecolor4
+ selected true
+ xpos 2835
+ ypos 155
+}
+Read {
+ inputs 0
+ file_type exr
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_sphere.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 40
+ origlast 40
+ origset true
+ name Read5
+ selected true
+ xpos 1916
+ ypos -94
+}
+Dot {
+ name Dot6
+ selected true
+ xpos 1950
+ ypos 162
+}
+DeepRead {
+ inputs 0
+ file C:/stuff/03_repos/b_deeptools/deeptools/data/3d/images/example_scene_01/deep_sphere.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 40
+ origlast 40
+ origset true
+ name DeepRead4
+ selected true
+ xpos 2095
+ ypos -96
+}
+DeepRecolor {
+ inputs 2
+ name DeepRecolor2
+ selected true
+ xpos 2095
+ ypos 158
+}
+Viewer {
+ frame 11
+ frame_range 1-40
+ fps 25
+ softSelect true
+ name Viewer1
+ xpos 151
+ ypos 790
+}

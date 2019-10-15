@@ -31,13 +31,13 @@ class Panel(QtGuiWidgets.QComboBox):
         self.resize(self.defaultSize[0],self.defaultSize[1])
         #self.setGeometry(300, 300, 200, 150)
         self.setWindowTitle("Deep with it")
-        
+
         self.move(QtGui.QCursor().pos() - QtCore.QPoint(32,74))
 
         self.edit = QtGuiWidgets.QLineEdit("Write my name here..")
         self.button = QtGuiWidgets.QPushButton("Show Greetings")
         self.pushbutton = QtGuiWidgets.QPushButton('Quit', self)
-        
+
         self.pushbutton.move(50,100)
         self.pushbutton.clicked.connect(self.quitApp)
 
@@ -47,8 +47,8 @@ class Panel(QtGuiWidgets.QComboBox):
         layout.addWidget(self.button)
         layout.addWidget(self.button)
         layout.addWidget(self.pushbutton)
-        
-        
+
+
 
         self.setLayout(layout)
 
@@ -94,13 +94,13 @@ class Panel(QtGuiWidgets):
 app = QApplication(sys.arg)
 panel = Panel()
 panel.show()
-app.exec_() 
+app.exec_()
 
- 
+
 #######################################################################################################################
 
 
-from PySide2.QtWidgets import QWidget,QApplication 
+from PySide2.QtWidgets import QWidget,QApplication
 from PySide2.QtWidgets import QListWidget, QHBoxLayout
 from PySide2.QtGui import QIcon, QColor
 
@@ -118,14 +118,14 @@ class Panel(QWidget):
             i.setIcon(QIcon("nuke.png"))
             i.setBackground(QColor(255,175,0))
             list_widget.addItem(i)
-            
+
 
         master_layout = QHBoxLayout()
         master_layout.addWidget(list_widget)
         self.setLayout(master_layout)
 
 panel = Panel()
-panel.show()    
+panel.show()
 
 
 #######################################################################################################################
@@ -137,7 +137,7 @@ panel.show()
 
   		table = QTableWidget()
 
-  		layout1 = QHBoxLayout() 
+  		layout1 = QHBoxLayout()
   		layout2 = QHBoxLayout()
   		layout3 = QHBoxLayout()
 
@@ -152,4 +152,6 @@ panel.show()
 
   		tab1 = QtGuiWidget()
   		tab2 = QtGuiWidget()
-  			
+
+
+
